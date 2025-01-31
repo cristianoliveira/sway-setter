@@ -1,2 +1,2 @@
 # sway-setter
-The missing CLI to use the outputs from sway builtin command `swaymsg -t get_*`
+The missing CLI to use the outputs from sway builtin "getters" commands `swaymsg -t get_*`
