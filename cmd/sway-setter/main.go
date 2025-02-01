@@ -13,7 +13,7 @@ import (
 func main() {
 	var opts struct {
 		Type  string `short:"t" long:"type" description:"Type 'set_{type}' object to be set analog of 'swaymsg -t get_{type}'"`
-		Print bool   `long:"print" description:"Prints commands that would be executed. Can be used as input to swaymsg"`
+		Print bool   `short:"p" long:"print" description:"Prints commands that would be executed. Can be used as input to swaymsg"`
 	}
 
 	args := os.Args[1:]

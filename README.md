@@ -10,7 +10,7 @@ Very useful to restore state after using wdisplays or similar tools, as well you
 
 I use SwayWM with my notebook and sometimes I have up to 3 monitors in different layouts, and I use wdisplays to configure them. But once I have to restart or log out my system the configuration is lost and I have to reconfigure them. My first attempt was to manually configure them in sway/config, but it was a pain to maintain and I had to change it every time I changed my monitor setup.
 
-I know sway has a way to export the current object with `swaymsg -t get_outputs` and `swaymsg -t get_workspaces`, I use those outputs mainly for debugging or scripting. Since the output is always the same why create a custom script? I should be able to load it back! That's the origin of `sway-setter`
+I know sway has a way to export the current state of certain objects like `swaymsg -t get_*` and I use those outputs mainly for debugging or scripting. Since the output is always the same why create a custom script? I should be able to load it back! That's the origin of `sway-setter`
 
 ## Current and future features
 
@@ -38,10 +38,10 @@ swaymsg -t get_inputs > output.json
 sway-setter -t set_inputs < output.json
 ```
 
-- [ ] Use as an input for swaymsg, with the flag `--print`
+- [x] Use as an input for swaymsg, with the flag `--print|-p`
 
 ```bash
-swaymsg "$(cat data.json | sway-setter --print -t set_workspaces)"
+swaymsg "$(sway-setter -pt set_workspaces < data.json)"
 ```
 
 If you are looking for session restoring, there are other tools that can do that, such as:

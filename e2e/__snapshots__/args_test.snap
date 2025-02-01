@@ -7,7 +7,7 @@ Usage:
 Application Options:
   -t, --type=  Type 'set_{type}' object to be set analog of 'swaymsg -t
                get_{type}'
-      --print  Prints commands that would be executed. Can be used as input to
+  -p, --print  Prints commands that would be executed. Can be used as input to
                swaymsg
 
 Help Options:
@@ -24,7 +24,7 @@ Usage:
 Application Options:
   -t, --type=  Type 'set_{type}' object to be set analog of 'swaymsg -t
                get_{type}'
-      --print  Prints commands that would be executed. Can be used as input to
+  -p, --print  Prints commands that would be executed. Can be used as input to
                swaymsg
 
 Help Options:
@@ -41,7 +41,7 @@ Usage:
 Application Options:
   -t, --type=  Type 'set_{type}' object to be set analog of 'swaymsg -t
                get_{type}'
-      --print  Prints commands that would be executed. Can be used as input to
+  -p, --print  Prints commands that would be executed. Can be used as input to
                swaymsg
 
 Help Options:
