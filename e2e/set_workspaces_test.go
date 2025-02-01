@@ -2,6 +2,7 @@ package e2e
 
 import (
 	"bytes"
+	"fmt"
 	"os/exec"
 	"testing"
 
@@ -22,6 +23,26 @@ func TestSetWorkspaces(t *testing.T) {
 				"--dry-run",
 			},
 			stdin:      `[{"id":1,"name":"1","output":"HDMI-A-0","focused":true}]`,
+			expectFail: true,
+		},
+		{
+			name: "set workspaces with invalid json",
+			args: []string{
+				"-t", "set_workspaces",
+				"--dry-run",
+			},
+			// Expect a json array
+			stdin:      `{"id":1,"name":"1","output":"HDMI-A-0","focused":true}`,
+			expectFail: true,
+		},
+		{
+			name: "set workspaces with incomplete json",
+			args: []string{
+				"-t", "set_workspaces",
+				"--dry-run",
+			},
+			// Expect a json array
+			stdin:      `{"id":1,"name":"1"`,
 			expectFail: true,
 		},
 		{
@@ -84,7 +105,11 @@ func TestSetWorkspaces(t *testing.T) {
 				tt.Fatalf("\nUnexpected fail:\n%s\nstderr:%s\n stdout:%s", err, errOut.String(), out.String())
 			}
 
-			snaps.MatchSnapshot(tt, cmd.String(), out.String())
+			snaps.MatchSnapshot(
+				tt,
+				fmt.Sprintf("%s < data.json", cmd.String()),
+				out.String(),
+			)
 		})
 	}
 }

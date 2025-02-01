@@ -25,5 +25,5 @@ test-e2e: build ## Run the e2e tests
 	@go test ./e2e -v
 
 .PHONY: test-e2e-update
-test-e2e-update: build ## Run the e2e tests snapshots
+test-e2e-update: build ## Run the e2e tests snapshots and update
 	UPDATE_SNAPS=true go test ./e2e -v
