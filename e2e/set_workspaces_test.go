@@ -2,6 +2,7 @@ package e2e
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"os/exec"
 	"testing"
@@ -96,9 +97,16 @@ func TestSetWorkspaces(t *testing.T) {
 				tt.Fatalf("\nUnexpected fail:\n%s\nstderr:%s\n stdout:%s", err, errOut.String(), out.String())
 			}
 
+			var prettyJson bytes.Buffer
+			err := json.Indent(&prettyJson, []byte(tc.stdin), "", "  ")
+			if err != nil {
+				// Fall back to the original input if the json is invalid
+				prettyJson.WriteString(tc.stdin)
+			}
+
 			snaps.MatchSnapshot(
 				tt,
-				fmt.Sprintf("%s < data.json", cmd.String()),
+				fmt.Sprintf("%s<<EOF\n%s\nEOF", cmd.String(), prettyJson.String()),
 				out.String(),
 			)
 		})
