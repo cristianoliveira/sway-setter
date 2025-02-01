@@ -12,8 +12,8 @@ import (
 
 func main() {
 	var opts struct {
-		Type   string `short:"t" long:"type" description:"Type 'set_{type}' object to be set analog of 'swaymsg -t get_{type}'"`
-		DryRun bool   `long:"dry-run" description:"Dry run mode"`
+		Type  string `short:"t" long:"type" description:"Type 'set_{type}' object to be set analog of 'swaymsg -t get_{type}'"`
+		Print bool   `long:"print" description:"Prints commands that would be executed. Can be used as input to swaymsg"`
 	}
 
 	args := os.Args[1:]
@@ -34,8 +34,8 @@ func main() {
 		os.Exit(1)
 	}
 
-	if opts.DryRun {
-		setters.ConfigDryRun()
+	if opts.Print {
+		setters.ConfigureStdout()
 	}
 
 	if len(opts.Type) > 0 {

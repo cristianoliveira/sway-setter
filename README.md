@@ -38,6 +38,12 @@ swaymsg -t get_inputs > output.json
 sway-setter -t set_inputs < output.json
 ```
 
+- [ ] Use as an input for swaymsg, with the flag `--print`
+
+```bash
+swaymsg "$(cat data.json | sway-setter --print -t set_workspaces)"
+```
+
 If you are looking for session restoring, there are other tools that can do that, such as:
 
  - [sway-session](https://github.com/gumieri/sway-session)

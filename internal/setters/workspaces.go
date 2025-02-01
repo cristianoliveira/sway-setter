@@ -11,7 +11,7 @@ type SwayWorkspace struct {
 	Focused bool   `json:"focused"`
 }
 
-func ConfigDryRun() {
+func ConfigureStdout() {
 	sway.SwayIPCConnector = &sway.StdOutputConnector{}
 }
 

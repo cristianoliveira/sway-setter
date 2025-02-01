@@ -12,7 +12,7 @@ var commandHistory []string
 
 func (c MockedConnector) Connect() (*sway.SwayMsgConnection, error) {
 	return &sway.SwayMsgConnection{
-		SwayIPC: &sway.DrySayIPCExecutor{
+		SwayIPC: &sway.CustomExecutor{
 			HandleExecute: func(command string) ([]byte, error) {
 				commandHistory = append(commandHistory, command)
 				return []byte{}, nil

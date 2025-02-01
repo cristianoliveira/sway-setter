@@ -50,29 +50,28 @@ func (c Connector) Connect() (*SwayMsgConnection, error) {
 
 var SwayIPCConnector SwayConnector = &Connector{}
 
-type DrySayIPCExecutor struct {
+type CustomExecutor struct {
 	HandleExecute func(command string) ([]byte, error)
 }
 
-func (m DrySayIPCExecutor) Execute(command string) ([]byte, error) {
+func (m CustomExecutor) Execute(command string) ([]byte, error) {
 	m.HandleExecute(command)
 	return []byte{}, nil
 }
 
-func (c DrySayIPCExecutor) Connect() (*SwayMsgConnection, error) {
+func (c CustomExecutor) Connect() (*SwayMsgConnection, error) {
 	return &SwayMsgConnection{
-		SwayIPC: &DrySayIPCExecutor{},
+		SwayIPC: &CustomExecutor{},
 	}, nil
 }
 
 // StdOutputConnector is a connector that outputs the commands to the standard output.
-// Used when running with dry-run flag.
+// Used when running with --output flag.
 type StdOutputConnector struct{}
 
 func (c StdOutputConnector) Connect() (*SwayMsgConnection, error) {
-	fmt.Println("INFO: Using standard output connector")
 	return &SwayMsgConnection{
-		SwayIPC: &DrySayIPCExecutor{
+		SwayIPC: &CustomExecutor{
 			HandleExecute: func(command string) ([]byte, error) {
 				fmt.Printf("%s\n", command)
 				return []byte{}, nil

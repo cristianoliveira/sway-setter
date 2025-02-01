@@ -20,7 +20,7 @@ func TestSetWorkspaces(t *testing.T) {
 			name: "set unkonwn workspaces",
 			args: []string{
 				"-t", "unknown",
-				"--dry-run",
+				"--print",
 			},
 			stdin:      `[{"id":1,"name":"1","output":"HDMI-A-0","focused":true}]`,
 			expectFail: true,
@@ -29,7 +29,7 @@ func TestSetWorkspaces(t *testing.T) {
 			name: "set workspaces with invalid json",
 			args: []string{
 				"-t", "set_workspaces",
-				"--dry-run",
+				"--print",
 			},
 			// Expect a json array
 			stdin:      `{"id":1,"name":"1","output":"HDMI-A-0","focused":true}`,
@@ -39,7 +39,7 @@ func TestSetWorkspaces(t *testing.T) {
 			name: "set workspaces with incomplete json",
 			args: []string{
 				"-t", "set_workspaces",
-				"--dry-run",
+				"--print",
 			},
 			// Expect a json array
 			stdin:      `{"id":1,"name":"1"`,
@@ -49,7 +49,7 @@ func TestSetWorkspaces(t *testing.T) {
 			name: "set workspaces one workspace",
 			args: []string{
 				"-t", "set_workspaces",
-				"--dry-run",
+				"--print",
 			},
 			stdin: `[
 				{
@@ -65,7 +65,7 @@ func TestSetWorkspaces(t *testing.T) {
 			name: "set workspaces with multiple workspaces",
 			args: []string{
 				"-t", "set_workspaces",
-				"--dry-run",
+				"--print",
 			},
 			stdin: `[
 				{
