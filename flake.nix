@@ -15,6 +15,7 @@
 
             # File watcher
             funzzy
+            yq
           ];
         };
     });
