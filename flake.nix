@@ -12,6 +12,9 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             go
+
+            # File watcher
+            funzzy
           ];
         };
     });

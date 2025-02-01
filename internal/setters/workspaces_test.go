@@ -25,6 +25,7 @@ func (c MockedConnector) Connect() (*sway.SwayMsgConnection, error) {
 
 func TestWorkspaceSetter(t *testing.T) {
 	t.Run("SetWorkspaces", func(t *testing.T) {
+		commandHistory = []string{}
 		sway.SwayIPCConnector = &MockedConnector{}
 
 		swayWorkspaces := []SwayWorkspace{
@@ -45,26 +46,23 @@ func TestWorkspaceSetter(t *testing.T) {
 			},
 		}
 
+		expectedCommands := []string{
+			"workspace 1; move workspace to output eDP-1",
+			"workspace 2; move workspace to output eDP-1",
+			"workspace 3; move workspace to output eDP-1",
+			"workspace 2",
+		}
+
 		SetWorkspaces(swayWorkspaces)
 
-		if len(commandHistory) != 4 {
+		if len(commandHistory) != len(expectedCommands) {
 			t.Errorf("Expected 4 commands to be executed, got %d", len(commandHistory))
 		}
 
-		if commandHistory[0] != "workspace 1; move workspace to output eDP-1" {
-			t.Errorf("Expected command 1 to be 'workspace 1; move workspace to output eDP-1', got %s", commandHistory[0])
-		}
-
-		if commandHistory[1] != "workspace 2; move workspace to output eDP-1" {
-			t.Errorf("Expected command 2 to be 'workspace 2; move workspace to output eDP-1', got %s", commandHistory[1])
-		}
-
-		if commandHistory[2] != "workspace 3; move workspace to output eDP-1" {
-			t.Errorf("Expected command 3 to be 'workspace 3; move workspace to output eDP-1', got %s", commandHistory[2])
-		}
-
-		if commandHistory[3] != "workspace 2" {
-			t.Errorf("Expected at the end to focus on 'workspace 2', got %s", commandHistory[3])
+		for i, command := range commandHistory {
+			if command != expectedCommands[i] {
+				t.Errorf("Expected: \n %s\nGot: %s", expectedCommands[i], command)
+			}
 		}
 	})
 }

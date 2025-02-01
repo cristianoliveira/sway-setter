@@ -1,0 +1,16 @@
+- name: build cli @quick
+  run: make build
+  change: "**/*.go"
+  run_on_init: true
+
+- name: run checks @quick
+  run: 
+   - make test
+   - make fmt
+  change: "**/*.go"
+  run_on_init: true
+
+- name: git stage file @quick
+  run: git add {{relative_path}}
+  change: "**/*.go"
+  run_on_init: true
