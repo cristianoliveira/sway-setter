@@ -6,7 +6,7 @@ help: ## Lists the available commands. Add a comment with '##' to describe a com
 
 .PHONY: build
 build: ## Build the sway-setter cli
-	@go build -o bin/sway-setter cmd/sway-setter/*.go
+	@go build -o bin/sway-setter .
 
 .PHONY: run
 run: ## Run the sway-setter cli
