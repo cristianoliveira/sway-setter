@@ -62,7 +62,7 @@ func Execute(opts *CliArgs) error {
 	}
 
 	if opts.Print {
-		setters.ConfigureStdout()
+		setters.ConfigStdoutConnector()
 	}
 
 	switch opts.Type {

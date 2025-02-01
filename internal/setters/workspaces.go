@@ -1,7 +1,7 @@
 package setters
 
 import (
-	"github.com/cristianoliveira/sway-setter/internal/sway"
+	"fmt"
 )
 
 type SwayWorkspace struct {
@@ -11,22 +11,30 @@ type SwayWorkspace struct {
 	Focused bool   `json:"focused"`
 }
 
-func ConfigureStdout() {
-	sway.SwayIPCConnector = &sway.StdOutputConnector{}
-}
-
-func SetWorkspaces(workspaces []SwayWorkspace) {
-	swaymsg, err := sway.SwayIPCConnector.Connect()
+// SetWorkspaces configures workspaces to the provided outputs
+// and focuses the workspace that is marked as focused.
+//
+// Use: '--print' to print the commands that would be executed.
+func SetWorkspaces(workspaces []SwayWorkspace) error {
+	swaymsg, err := ConnectToSway()
 	if err != nil {
-		panic(err)
+		return err
+	}
+
+	if len(workspaces) == 0 {
+		return fmt.Errorf("Error: no workspaces provided")
 	}
 
 	var focusedWorkspace *SwayWorkspace
 	for _, workspace := range workspaces {
-		swaymsg.MoveWorkspaceToOutput(
+		err = swaymsg.MoveWorkspaceToOutput(
 			workspace.Name,
 			workspace.Output,
 		)
+
+		if err != nil {
+			return err
+		}
 
 		if workspace.Focused {
 			focusedWorkspace = &workspace
@@ -37,4 +45,6 @@ func SetWorkspaces(workspaces []SwayWorkspace) {
 	if focusedWorkspace != nil {
 		swaymsg.FocusWorkspace(focusedWorkspace.Name)
 	}
+
+	return nil
 }

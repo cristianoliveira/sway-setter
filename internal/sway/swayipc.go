@@ -33,7 +33,7 @@ func (s *SwayConnection) Execute(command string) ([]byte, error) {
 	return data, nil
 }
 
-func (c Connector) Connect() (*SwayMsgConnection, error) {
+func (c *Connector) Connect() (*SwayMsgConnection, error) {
 	sc, err := ipc.NewSwayConnection()
 	if err != nil {
 		return nil, err
@@ -55,8 +55,7 @@ type CustomExecutor struct {
 }
 
 func (m CustomExecutor) Execute(command string) ([]byte, error) {
-	m.HandleExecute(command)
-	return []byte{}, nil
+	return m.HandleExecute(command)
 }
 
 func (c CustomExecutor) Connect() (*SwayMsgConnection, error) {

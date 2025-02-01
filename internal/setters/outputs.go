@@ -2,8 +2,6 @@ package setters
 
 import (
 	"fmt"
-
-	"github.com/cristianoliveira/sway-setter/internal/sway"
 )
 
 type OutputRect struct {
@@ -23,7 +21,7 @@ type SwayOutput struct {
 }
 
 func SetOutputs(outputs []SwayOutput) error {
-	swaymsg, err := sway.SwayIPCConnector.Connect()
+	swaymsg, err := ConnectToSway()
 	if err != nil {
 		return err
 	}
