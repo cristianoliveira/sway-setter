@@ -4,27 +4,13 @@ import (
 	"testing"
 
 	"github.com/cristianoliveira/sway-setter/internal/sway"
+	"github.com/cristianoliveira/sway-setter/internal/testutils"
 )
-
-type MockedConnector struct{}
-
-var commandHistory []string
-
-func (c MockedConnector) Connect() (*sway.SwayMsgConnection, error) {
-	return &sway.SwayMsgConnection{
-		SwayIPC: &sway.CustomExecutor{
-			HandleExecute: func(command string) ([]byte, error) {
-				commandHistory = append(commandHistory, command)
-				return []byte{}, nil
-			},
-		},
-	}, nil
-}
 
 func TestWorkspaceSetter(t *testing.T) {
 	t.Run("SetWorkspaces", func(t *testing.T) {
-		commandHistory = []string{}
-		sway.SwayIPCConnector = &MockedConnector{}
+		con := testutils.MockedConnector{}
+		sway.SwayIPCConnector = &con
 
 		swayWorkspaces := []SwayWorkspace{
 			{
@@ -53,11 +39,11 @@ func TestWorkspaceSetter(t *testing.T) {
 
 		SetWorkspaces(swayWorkspaces)
 
-		if len(commandHistory) != len(expectedCommands) {
-			t.Errorf("Expected 4 commands to be executed, got %d", len(commandHistory))
+		if len(con.CommandsHistory) != len(expectedCommands) {
+			t.Errorf("Expected 4 commands to be executed, got %d", len(con.CommandsHistory))
 		}
 
-		for i, command := range commandHistory {
+		for i, command := range con.CommandsHistory {
 			if command != expectedCommands[i] {
 				t.Errorf("Expected: \n %s\nGot: %s", expectedCommands[i], command)
 			}
