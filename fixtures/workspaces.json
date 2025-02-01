@@ -1,0 +1,410 @@
+[
+  {
+    "id": 382,
+    "type": "workspace",
+    "orientation": "horizontal",
+    "percent": null,
+    "urgent": false,
+    "marks": [],
+    "layout": "splith",
+    "border": "none",
+    "current_border_width": 0,
+    "rect": {
+      "x": 1920,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    "deco_rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "window_rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "geometry": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "name": "1",
+    "window": null,
+    "nodes": [],
+    "floating_nodes": [],
+    "focus": [
+      444
+    ],
+    "fullscreen_mode": 1,
+    "sticky": false,
+    "floating": null,
+    "scratchpad_state": null,
+    "num": 1,
+    "output": "DP-2",
+    "representation": "H[H[Brave-browser]]",
+    "focused": false,
+    "visible": false
+  },
+  {
+    "id": 441,
+    "type": "workspace",
+    "orientation": "horizontal",
+    "percent": null,
+    "urgent": false,
+    "marks": [],
+    "layout": "splith",
+    "border": "none",
+    "current_border_width": 0,
+    "rect": {
+      "x": 1920,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    "deco_rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "window_rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "geometry": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "name": "2",
+    "window": null,
+    "nodes": [],
+    "floating_nodes": [],
+    "focus": [
+      466
+    ],
+    "fullscreen_mode": 1,
+    "sticky": false,
+    "floating": null,
+    "scratchpad_state": null,
+    "num": 2,
+    "output": "DP-2",
+    "representation": "H[alacritty]",
+    "focused": true,
+    "visible": true
+  },
+  {
+    "id": 379,
+    "type": "workspace",
+    "orientation": "horizontal",
+    "percent": null,
+    "urgent": false,
+    "marks": [],
+    "layout": "splith",
+    "border": "none",
+    "current_border_width": 0,
+    "rect": {
+      "x": 1920,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    "deco_rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "window_rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "geometry": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "name": "3",
+    "window": null,
+    "nodes": [],
+    "floating_nodes": [],
+    "focus": [
+      335
+    ],
+    "fullscreen_mode": 1,
+    "sticky": false,
+    "floating": null,
+    "scratchpad_state": null,
+    "num": 3,
+    "output": "DP-2",
+    "representation": "H[H[H[Brave-browser]]]",
+    "focused": false,
+    "visible": false
+  },
+  {
+    "id": 404,
+    "type": "workspace",
+    "orientation": "horizontal",
+    "percent": null,
+    "urgent": false,
+    "marks": [],
+    "layout": "splith",
+    "border": "none",
+    "current_border_width": 0,
+    "rect": {
+      "x": 1920,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    "deco_rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "window_rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "geometry": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "name": "4",
+    "window": null,
+    "nodes": [],
+    "floating_nodes": [],
+    "focus": [
+      402
+    ],
+    "fullscreen_mode": 1,
+    "sticky": false,
+    "floating": null,
+    "scratchpad_state": null,
+    "num": 4,
+    "output": "DP-2",
+    "representation": "H[Brave-browser]",
+    "focused": false,
+    "visible": false
+  },
+  {
+    "id": 353,
+    "type": "workspace",
+    "orientation": "horizontal",
+    "percent": null,
+    "urgent": false,
+    "marks": [],
+    "layout": "splith",
+    "border": "none",
+    "current_border_width": 0,
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    "deco_rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "window_rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "geometry": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "name": "5",
+    "window": null,
+    "nodes": [],
+    "floating_nodes": [],
+    "focus": [
+      457
+    ],
+    "fullscreen_mode": 1,
+    "sticky": false,
+    "floating": null,
+    "scratchpad_state": null,
+    "num": 5,
+    "output": "DP-1",
+    "representation": "H[H[H[Brave-browser]]]",
+    "focused": false,
+    "visible": true
+  },
+  {
+    "id": 302,
+    "type": "workspace",
+    "orientation": "horizontal",
+    "percent": null,
+    "urgent": false,
+    "marks": [],
+    "layout": "splith",
+    "border": "none",
+    "current_border_width": 0,
+    "rect": {
+      "x": 1920,
+      "y": 1080,
+      "width": 1920,
+      "height": 1200
+    },
+    "deco_rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "window_rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "geometry": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "name": "8",
+    "window": null,
+    "nodes": [],
+    "floating_nodes": [],
+    "focus": [
+      312
+    ],
+    "fullscreen_mode": 1,
+    "sticky": false,
+    "floating": null,
+    "scratchpad_state": null,
+    "num": 8,
+    "output": "eDP-1",
+    "representation": "H[Spotify]",
+    "focused": false,
+    "visible": false
+  },
+  {
+    "id": 114,
+    "type": "workspace",
+    "orientation": "vertical",
+    "percent": null,
+    "urgent": false,
+    "marks": [],
+    "layout": "splitv",
+    "border": "none",
+    "current_border_width": 0,
+    "rect": {
+      "x": 1920,
+      "y": 1080,
+      "width": 1920,
+      "height": 1200
+    },
+    "deco_rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "window_rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "geometry": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "name": "9",
+    "window": null,
+    "nodes": [],
+    "floating_nodes": [],
+    "focus": [
+      112
+    ],
+    "fullscreen_mode": 1,
+    "sticky": false,
+    "floating": null,
+    "scratchpad_state": null,
+    "num": 9,
+    "output": "eDP-1",
+    "representation": "V[Brave-browser]",
+    "focused": false,
+    "visible": false
+  },
+  {
+    "id": 20,
+    "type": "workspace",
+    "orientation": "horizontal",
+    "percent": null,
+    "urgent": false,
+    "marks": [],
+    "layout": "splith",
+    "border": "none",
+    "current_border_width": 0,
+    "rect": {
+      "x": 1920,
+      "y": 1080,
+      "width": 1920,
+      "height": 1200
+    },
+    "deco_rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "window_rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "geometry": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "name": "10",
+    "window": null,
+    "nodes": [],
+    "floating_nodes": [],
+    "focus": [
+      19
+    ],
+    "fullscreen_mode": 1,
+    "sticky": false,
+    "floating": null,
+    "scratchpad_state": null,
+    "num": 10,
+    "output": "eDP-1",
+    "representation": "H[whatsapp-for-linux]",
+    "focused": false,
+    "visible": true
+  }
+]
