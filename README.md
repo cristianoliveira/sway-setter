@@ -18,6 +18,9 @@ The main goal of sway-setter is to restore current configuration not the current
 The current features are:
 
 - [x] Restore workspaces
+  - [x] Restore names
+  - [x] Restore workspace per output
+  - [x] Restore focused workspace
 
 ```bash
 swaymsg -t get_workspaces > output.json
@@ -26,12 +29,19 @@ sway-setter -t set_workspaces < output.json
 
 - [ ] Restore outputs 
 
+  - [x] Restore positions
+  - [ ] Restore modes
+  - [ ] Restore scale
+  - [ ] Restore transform
+  - [ ] Restore primary
+  - [ ] Restore active
+
 ```bash
 swaymsg -t get_outputs > output.json
 sway-setter -t set_outputs < output.json
 ```
 
-- [ ] Restore inputs
+- [ ] Restore inputt
 
 ```bash
 swaymsg -t get_inputs > output.json
@@ -48,6 +58,10 @@ If you are looking for session restoring, there are other tools that can do that
 
  - [sway-session](https://github.com/gumieri/sway-session)
  - [swayrst](https://github.com/Nama/swayrst)
+
+### More examples
+
+To see more examples check the [fixtures](./fixtures) folder, the snapshots contain the commands expected to be sent to sway.
 
 ## Installation
 
@@ -82,6 +96,10 @@ For other commands, please check the Makefile
 ```bash
 make help
 ```
+
+## Contributing
+
+Want to help? Pick a missing feature and open a PR! Any help is welcomed!
 
 ## License
 

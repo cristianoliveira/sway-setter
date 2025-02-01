@@ -4,7 +4,7 @@ import (
 	"github.com/cristianoliveira/sway-setter/internal/sway"
 )
 
-type MockedConnector struct{
+type MockedConnector struct {
 	CommandsHistory []string
 }
 
@@ -18,4 +18,3 @@ func (c *MockedConnector) Connect() (*sway.SwayMsgConnection, error) {
 		},
 	}, nil
 }
-
