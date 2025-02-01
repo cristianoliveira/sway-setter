@@ -5,10 +5,10 @@ import (
 )
 
 type SwayWorkspace struct {
-	Id     int    `json:"id"`
-	Name   string `json:"name"`
-	Output string `json:"output"`
-	Focused bool  `json:"focused"`
+	Id      int    `json:"id"`
+	Name    string `json:"name"`
+	Output  string `json:"output"`
+	Focused bool   `json:"focused"`
 }
 
 func SetWorkspaces(workspaces []SwayWorkspace) {

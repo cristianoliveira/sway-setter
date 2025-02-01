@@ -10,7 +10,7 @@ type MockedConnector struct{}
 
 var commandHistory []string
 
-type MockedCommandExecutor struct{ }
+type MockedCommandExecutor struct{}
 
 func (m MockedCommandExecutor) Execute(command string) ([]byte, error) {
 	commandHistory = append(commandHistory, command)
@@ -29,18 +29,18 @@ func TestWorkspaceSetter(t *testing.T) {
 
 		swayWorkspaces := []SwayWorkspace{
 			{
-				Name:   "1",
-				Output: "eDP-1",
+				Name:    "1",
+				Output:  "eDP-1",
 				Focused: false,
 			},
 			{
-				Name:   "2",
-				Output: "eDP-1",
+				Name:    "2",
+				Output:  "eDP-1",
 				Focused: true,
 			},
 			{
-				Name:   "3",
-				Output: "eDP-1",
+				Name:    "3",
+				Output:  "eDP-1",
 				Focused: false,
 			},
 		}

@@ -11,3 +11,11 @@ run: ## Run the sway-setter cli
 .PHONY: test
 test: ## Run all tests
 	@go test -v ./...
+
+.PHONY: fmt
+fmt: ## Run gofmt
+	@(echo "${OK_COLOR}Running fmt ...${NO_COLOR}")
+	@([ $$(gofmt -l . | wc -l) != 0 ] && \
+	echo "${WARN_COLOR}The following files are not correctly formated:${NO_COLOR}" && \
+	echo "${ERROR_COLOR}" && gofmt -l . && \
+	echo "${NO_COLOR}"  && exit 1 || exit 0)

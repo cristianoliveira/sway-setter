@@ -22,7 +22,7 @@ type SwayCommand struct {
 	Con *ipc.SwayConnection
 }
 
-func (s *SwayCommand) Execute(command string) ([]byte, error){
+func (s *SwayCommand) Execute(command string) ([]byte, error) {
 	data, err := s.Con.RunSwayCommand(command)
 	return data, err
 }

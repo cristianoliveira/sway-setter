@@ -13,10 +13,10 @@ import (
 func main() {
 	var opts struct {
 		Verbose []bool `short:"v" long:"verbose" description:"Show verbose debug information"`
-    Type string `short:"t" long:"type" description:"Type of input"`
+		Type    string `short:"t" long:"type" description:"Type of input"`
 	}
 
-  args := os.Args[1:]
+	args := os.Args[1:]
 
 	args, err := flags.ParseArgs(&opts, args)
 
@@ -24,24 +24,24 @@ func main() {
 		panic(err)
 	}
 
-  scanner := bufio.NewScanner(os.Stdin)
-  input := ""
-  for scanner.Scan() {
-    input += scanner.Text() + "\n"
-  }
+	scanner := bufio.NewScanner(os.Stdin)
+	input := ""
+	for scanner.Scan() {
+		input += scanner.Text() + "\n"
+	}
 
-  if len(input) == 0 {
-    fmt.Println("No input provided")
-    os.Exit(1)
-  }
+	if len(input) == 0 {
+		fmt.Println("No input provided")
+		os.Exit(1)
+	}
 
-  fmt.Println(input)
+	fmt.Println(input)
 
-  if scanner.Err() != nil {
-    panic(err)
-  }
+	if scanner.Err() != nil {
+		panic(err)
+	}
 
-  var workspaces []setters.SwayWorkspace
-  json.Unmarshal([]byte(input), &workspaces)
-  setters.SetWorkspaces(workspaces)
+	var workspaces []setters.SwayWorkspace
+	json.Unmarshal([]byte(input), &workspaces)
+	setters.SetWorkspaces(workspaces)
 }
