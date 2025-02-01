@@ -61,7 +61,7 @@ If you are looking for session restoring, there are other tools that can do that
 
 ### More examples
 
-To see more examples check the [fixtures](./fixtures) folder, the snapshots contain the commands expected to be sent to sway.
+To see more examples check the [snapshots](./e2e/__snapshots__) folder, the snapshots contain the commands expected to be sent to sway.
 
 ## Installation
 
