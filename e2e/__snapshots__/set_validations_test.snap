@@ -1,0 +1,10 @@
+
+[TestSetValidations/set_unkonwn_workspaces - 1]
+../bin/sway-setter -t unknown --print < data.json
+Error: type `unknown` is not supported
+
+Supported types
+ set_workspaces: set workspaces from `swaymsg -t get_workspaces`
+ set_outputs: set outputs from `swaymsg -t get_outputs`
+
+---

@@ -17,15 +17,6 @@ func TestSetWorkspaces(t *testing.T) {
 		expectFail bool
 	}{
 		{
-			name: "set unkonwn workspaces",
-			args: []string{
-				"-t", "unknown",
-				"--print",
-			},
-			stdin:      `[{"id":1,"name":"1","output":"HDMI-A-0","focused":true}]`,
-			expectFail: true,
-		},
-		{
 			name: "set workspaces with invalid json",
 			args: []string{
 				"-t", "set_workspaces",

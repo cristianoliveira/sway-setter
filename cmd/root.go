@@ -51,6 +51,8 @@ func ScanStdin() (string, error){
 	return input, nil
 }
 
+var	SetOptions = []string{"set_workspaces", "set_outputs"}
+
 func Execute(opts *CliArgs) error {
 	var err error
 	scanner := bufio.NewScanner(os.Stdin)
@@ -100,6 +102,10 @@ func Execute(opts *CliArgs) error {
 		return nil
 
 	default:
-		return fmt.Errorf("Error: type `%s` is not supported\nSupported types\n set_workspaces: load workspaces from `swaymsg` output", opts.Type)
+		errMsg := fmt.Sprintf("Error: type `%s` is not supported\n\n", opts.Type)
+		errMsg += fmt.Sprintf("Supported types\n")
+		errMsg += fmt.Sprintf(" set_workspaces: set workspaces from `swaymsg -t get_workspaces`\n")
+		errMsg += fmt.Sprintf(" set_outputs: set outputs from `swaymsg -t get_outputs`")
+		return fmt.Errorf(errMsg)
 	}
 }
