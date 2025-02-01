@@ -17,7 +17,7 @@ type SwayOutput struct {
 	Active    bool       `json:"active"`
 	Dpms      bool       `json:"dpms"`
 	Transform string     `json:"transform"`
-	Rect      OutputRect `json:"rect"`
+	Rect      *OutputRect `json:"rect"`
 }
 
 func SetOutputs(outputs []SwayOutput) error {
@@ -31,6 +31,10 @@ func SetOutputs(outputs []SwayOutput) error {
 	}
 
 	for _, output := range outputs {
+		if output.Rect == nil {
+			return fmt.Errorf("Error: output rect is empty")
+		}
+
 		err = swaymsg.SetOutputPosition(
 			output.Name,
 			output.Rect.X,

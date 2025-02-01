@@ -2,6 +2,7 @@ package e2e
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"os/exec"
 	"testing"
@@ -22,7 +23,8 @@ func TestSetOutputs(t *testing.T) {
 				"-t", "set_outputs",
 				"--print",
 			},
-			stdin: `[
+			stdin: `
+			[
 				{
 					"id":1,
 					"name":"HDMI-A-0",
@@ -30,7 +32,7 @@ func TestSetOutputs(t *testing.T) {
 						"x":0,
 						"y":0,
 						"width":1920,
-						"height":1080,
+						"height":1080
 					}
 				}
 			]`,
@@ -42,7 +44,8 @@ func TestSetOutputs(t *testing.T) {
 				"-t", "set_outputs",
 				"--print",
 			},
-			stdin: `[
+			stdin: `
+			[
 				{
 					"id": 383,
 					"foo": "DP-2",
@@ -64,7 +67,8 @@ func TestSetOutputs(t *testing.T) {
 				"-t", "set_outputs",
 				"--print",
 			},
-			stdin: `[
+			stdin: `
+			[
 				{
 					"id": 383,
 					"name": "DP-2",
@@ -86,7 +90,8 @@ func TestSetOutputs(t *testing.T) {
 				"-t", "set_outputs",
 				"--print",
 			},
-			stdin: `[
+			stdin: `
+			[
 				{
 					"id": 383,
 					"name": "DP-2",
@@ -135,9 +140,14 @@ func TestSetOutputs(t *testing.T) {
 				tt.Fatalf("\nExpected fail but got success")
 			}
 
+			var prettyJson bytes.Buffer
+			err = json.Indent(&prettyJson, []byte(tc.stdin), "", "  ")
+			if err != nil {
+				tt.Fatalf("\nError indenting json: %s", err)
+			}
 			snaps.MatchSnapshot(
 				tt,
-				fmt.Sprintf("%s < data.json", cmd.String()),
+				fmt.Sprintf("%s <<EOF\n%s\nEOF", cmd.String(), prettyJson.String()),
 				out.String(),
 			)
 		})
