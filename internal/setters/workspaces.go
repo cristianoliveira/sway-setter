@@ -11,6 +11,10 @@ type SwayWorkspace struct {
 	Focused bool   `json:"focused"`
 }
 
+func ConfigDryRun() {
+	sway.SwayIPCConnector = &sway.StdOutputConnector{}
+}
+
 func SetWorkspaces(workspaces []SwayWorkspace) {
 	swaymsg, err := sway.SwayIPCConnector.Connect()
 	if err != nil {

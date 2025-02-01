@@ -7,10 +7,15 @@
   run: 
    - make test
    - make fmt
-  change: "**/*.go"
+   - make test-e2e
+  change: 
+    - "**/*.go"
+    - "**/*.snap"
   run_on_init: true
 
 - name: git stage file @quick
   run: git add {{relative_path}}
-  change: "**/*.go"
+  change: 
+    - "**/*.go"
+    - "**/*.snap"
   run_on_init: true

@@ -12,36 +12,56 @@ import (
 
 func main() {
 	var opts struct {
-		Verbose []bool `short:"v" long:"verbose" description:"Show verbose debug information"`
-		Type    string `short:"t" long:"type" description:"Type of input"`
+		Type   string `short:"t" long:"type" description:"Type 'set_{type}' object to be set analog of 'swaymsg -t get_{type}'"`
+		DryRun bool   `long:"dry-run" description:"Dry run mode"`
 	}
 
 	args := os.Args[1:]
-
 	args, err := flags.ParseArgs(&opts, args)
-
 	if err != nil {
-		panic(err)
+		if len(os.Args) <= 1 {
+			os.Exit(1)
+		} else {
+			os.Exit(0)
+		}
+		return
 	}
 
 	scanner := bufio.NewScanner(os.Stdin)
-	input := ""
-	for scanner.Scan() {
-		input += scanner.Text() + "\n"
-	}
-
-	if len(input) == 0 {
-		fmt.Println("No input provided")
+	if scanner.Err() != nil {
+		fmt.Println("Error: failed to read input")
+		fmt.Println(err)
 		os.Exit(1)
 	}
 
-	fmt.Println(input)
-
-	if scanner.Err() != nil {
-		panic(err)
+	if opts.DryRun {
+		setters.ConfigDryRun()
 	}
 
-	var workspaces []setters.SwayWorkspace
-	json.Unmarshal([]byte(input), &workspaces)
-	setters.SetWorkspaces(workspaces)
+	if len(opts.Type) > 0 {
+		if opts.Type == "set_workspaces" {
+			input := ""
+			for scanner.Scan() {
+				input += scanner.Text() + "\n"
+			}
+
+			if len(input) == 0 {
+				fmt.Println("No input provided")
+				os.Exit(1)
+			}
+
+			var workspaces []setters.SwayWorkspace
+			json.Unmarshal([]byte(input), &workspaces)
+			setters.SetWorkspaces(workspaces)
+			return
+		}
+
+		fmt.Printf("Error: type `%s` is not supported\n", opts.Type)
+		fmt.Println("Supported types")
+		fmt.Println(" set_workspaces: load workspaces from `swaymsg` output")
+		os.Exit(1)
+	}
+
+	flags.ParseArgs(&opts, []string{"-h"})
+	os.Exit(0)
 }

@@ -1,0 +1,26 @@
+
+[TestSetWorkspaces/set_unkonwn_workspaces - 1]
+../bin/sway-setter -t unknown --dry-run
+Error: type `unknown` is not supported
+Supported types
+ set_workspaces: load workspaces from `swaymsg` output
+
+---
+
+[TestSetWorkspaces/set_workspaces_one_workspace - 1]
+../bin/sway-setter -t set_workspaces --dry-run
+INFO: Using standard output connector
+workspace 1; move workspace to output HDMI-A-0
+workspace 1
+
+---
+
+[TestSetWorkspaces/set_workspaces_with_multiple_workspaces - 1]
+../bin/sway-setter -t set_workspaces --dry-run
+INFO: Using standard output connector
+workspace 1; move workspace to output HDMI-A-0
+workspace 2; move workspace to output DP-1
+workspace 3; move workspace to output eDP-1
+workspace 2
+
+---

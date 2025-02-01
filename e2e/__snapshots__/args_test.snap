@@ -1,0 +1,48 @@
+
+[TestFlags/help_flag:_[-h] - 1]
+../bin/sway-setter -h
+Usage:
+  sway-setter [OPTIONS]
+
+Application Options:
+  -t, --type=    Type 'set_{type}' object to be set analog of 'swaymsg -t
+                 get_{type}'
+      --dry-run  Dry run mode
+
+Help Options:
+  -h, --help     Show this help message
+
+
+---
+
+[TestFlags/help_flag:_[--help] - 1]
+../bin/sway-setter --help
+Usage:
+  sway-setter [OPTIONS]
+
+Application Options:
+  -t, --type=    Type 'set_{type}' object to be set analog of 'swaymsg -t
+                 get_{type}'
+      --dry-run  Dry run mode
+
+Help Options:
+  -h, --help     Show this help message
+
+
+---
+
+[TestFlags/no_flag:_[] - 1]
+../bin/sway-setter
+Usage:
+  sway-setter [OPTIONS]
+
+Application Options:
+  -t, --type=    Type 'set_{type}' object to be set analog of 'swaymsg -t
+                 get_{type}'
+      --dry-run  Dry run mode
+
+Help Options:
+  -h, --help     Show this help message
+
+
+---

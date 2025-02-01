@@ -19,3 +19,11 @@ test: ## Run all tests
 .PHONY: fmt
 fmt: ## Run gofmt
 	@gofmt -w .
+
+.PHONY: test-e2e
+test-e2e: build ## Run the e2e tests
+	@go test ./e2e -v
+
+.PHONY: test-e2e-update
+test-e2e-update: build ## Run the e2e tests snapshots
+	UPDATE_SNAPS=true go test ./e2e -v

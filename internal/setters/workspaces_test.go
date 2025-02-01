@@ -10,16 +10,14 @@ type MockedConnector struct{}
 
 var commandHistory []string
 
-type MockedCommandExecutor struct{}
-
-func (m MockedCommandExecutor) Execute(command string) ([]byte, error) {
-	commandHistory = append(commandHistory, command)
-	return []byte{}, nil
-}
-
 func (c MockedConnector) Connect() (*sway.SwayMsgConnection, error) {
 	return &sway.SwayMsgConnection{
-		SwayIPC: &MockedCommandExecutor{},
+		SwayIPC: &sway.DrySayIPCExecutor{
+			HandleExecute: func(command string) ([]byte, error) {
+				commandHistory = append(commandHistory, command)
+				return []byte{}, nil
+			},
+		},
 	}, nil
 }
 
