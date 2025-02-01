@@ -1,7 +1,6 @@
 package sway
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -10,7 +9,6 @@ type SwayMsgResult struct {
 }
 
 type SwayMsgr interface {
-	Commmand(command string) error
 	MoveWorkspaceToOutput(workspaceName string, outputName string) error
 	FocusWorkspace(workspaceName string) error
 }
@@ -26,19 +24,9 @@ func (s SwayMsgConnection) FocusWorkspace(workspaceName string) error {
 }
 
 func (s SwayMsgConnection) Command(command string) error {
-	data, err := s.SwayConnection.Execute(command)
-	if err != nil {
-		panic(err)
-	}
-
-	result := []SwayMsgResult{}
-	err = json.Unmarshal(data, &result)
+	_, err := s.SwayIPC.Execute(command)
 	if err != nil {
 		return err
-	}
-
-	if !result[0].Success {
-		return fmt.Errorf("Command %s failed", command)
 	}
 
 	return nil

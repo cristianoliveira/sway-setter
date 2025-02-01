@@ -9,22 +9,26 @@ type SwayConnector interface {
 }
 
 type SwayMsgConnection struct {
-	SwayConnection SwayCommandExecutor
+	SwayIPC SwayIPCConnection
 }
 
 type Connector struct{}
 
-type SwayCommandExecutor interface {
+type SwayIPCConnection interface {
 	Execute(command string) ([]byte, error)
 }
 
-type SwayCommand struct {
+type SwayConnection struct {
 	Con *ipc.SwayConnection
 }
 
-func (s *SwayCommand) Execute(command string) ([]byte, error) {
+func (s *SwayConnection) Execute(command string) ([]byte, error) {
 	data, err := s.Con.RunSwayCommand(command)
-	return data, err
+	if err != nil {
+		return nil, err
+	}
+
+	return data, nil
 }
 
 func (c Connector) Connect() (*SwayMsgConnection, error) {
@@ -33,12 +37,12 @@ func (c Connector) Connect() (*SwayMsgConnection, error) {
 		return nil, err
 	}
 
-	conn := &SwayCommand{
+	conn := &SwayConnection{
 		Con: sc,
 	}
 
 	return &SwayMsgConnection{
-		SwayConnection: conn,
+		SwayIPC: conn,
 	}, nil
 }
 

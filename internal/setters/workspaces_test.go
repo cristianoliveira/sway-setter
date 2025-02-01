@@ -19,7 +19,7 @@ func (m MockedCommandExecutor) Execute(command string) ([]byte, error) {
 
 func (c MockedConnector) Connect() (*sway.SwayMsgConnection, error) {
 	return &sway.SwayMsgConnection{
-		SwayConnection: &MockedCommandExecutor{},
+		SwayIPC: &MockedCommandExecutor{},
 	}, nil
 }
 
