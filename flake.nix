@@ -18,5 +18,9 @@
             yq
           ];
         };
+
+        packages = {
+          default = pkgs.callPackage ./nix/package.nix { inherit pkgs; };
+        };
     });
 }
