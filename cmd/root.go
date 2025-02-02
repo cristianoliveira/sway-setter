@@ -32,7 +32,7 @@ func Args() *CliArgs {
 	return &opts
 }
 
-func ScanStdin() (string, error){
+func ScanStdin() (string, error) {
 	input := ""
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
@@ -51,7 +51,7 @@ func ScanStdin() (string, error){
 	return input, nil
 }
 
-var	SetOptions = []string{"set_workspaces", "set_outputs"}
+var SetOptions = []string{"set_workspaces", "set_outputs"}
 
 func Execute(opts *CliArgs) error {
 	var err error

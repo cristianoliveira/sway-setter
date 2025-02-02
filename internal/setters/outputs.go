@@ -12,11 +12,11 @@ type OutputRect struct {
 }
 
 type SwayOutput struct {
-	Id        int        `json:"id"`
-	Name      string     `json:"name"`
-	Active    bool       `json:"active"`
-	Dpms      bool       `json:"dpms"`
-	Transform string     `json:"transform"`
+	Id        int         `json:"id"`
+	Name      string      `json:"name"`
+	Active    bool        `json:"active"`
+	Dpms      bool        `json:"dpms"`
+	Transform string      `json:"transform"`
 	Rect      *OutputRect `json:"rect"`
 }
 

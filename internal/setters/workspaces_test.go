@@ -54,10 +54,10 @@ func TestWorkspaceSetter(t *testing.T) {
 
 func TestWorkspaceSetterValidations(t *testing.T) {
 	cases := []struct {
-		title       string
+		title      string
 		workspaces []SwayWorkspace
 		errorMsg   string
-		connector sway.SwayConnector
+		connector  sway.SwayConnector
 	}{
 		{
 			title: "error on sway connection",
@@ -69,7 +69,7 @@ func TestWorkspaceSetterValidations(t *testing.T) {
 					Focused: true,
 				},
 			},
-			errorMsg:  "Error: error on sway connection",
+			errorMsg: "Error: error on sway connection",
 			connector: &testutils.DinamicMockedConnector{
 				Handler: func(command string) ([]byte, error) {
 					return nil, fmt.Errorf("Error: error on sway connection")
@@ -78,14 +78,14 @@ func TestWorkspaceSetterValidations(t *testing.T) {
 		},
 
 		{
-			title:       "empty workspaces",
+			title:      "empty workspaces",
 			workspaces: []SwayWorkspace{},
 			errorMsg:   "Error: no workspaces provided",
 			connector:  &testutils.DinamicMockedConnector{},
 		},
 
 		{
-			title:       "workspace name is empty",
+			title: "workspace name is empty",
 			workspaces: []SwayWorkspace{
 				{
 					Id:      1,
@@ -93,12 +93,12 @@ func TestWorkspaceSetterValidations(t *testing.T) {
 					Focused: true,
 				},
 			},
-			errorMsg:   "Error: workspace name is empty",
-			connector:  &testutils.DinamicMockedConnector{},
+			errorMsg:  "Error: workspace name is empty",
+			connector: &testutils.DinamicMockedConnector{},
 		},
 
 		{
-			title:       "output name is empty",
+			title: "output name is empty",
 			workspaces: []SwayWorkspace{
 				{
 					Id:      1,
@@ -106,8 +106,8 @@ func TestWorkspaceSetterValidations(t *testing.T) {
 					Focused: true,
 				},
 			},
-			errorMsg:   "Error: output name is empty",
-			connector:  &testutils.DinamicMockedConnector{},
+			errorMsg:  "Error: output name is empty",
+			connector: &testutils.DinamicMockedConnector{},
 		},
 	}
 

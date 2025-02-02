@@ -21,7 +21,7 @@ func (c *MockedConnector) Connect() (*sway.SwayMsgConnection, error) {
 
 type DinamicMockedConnector struct {
 	CommandsHistory []string
-	Handler				 func(command string) ([]byte, error)
+	Handler         func(command string) ([]byte, error)
 }
 
 func (c *DinamicMockedConnector) Connect() (*sway.SwayMsgConnection, error) {
