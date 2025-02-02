@@ -31,3 +31,7 @@ nix-flake-check: ## Check the nix flake
 .PHONY: nix-build-source
 nix-build-source: ## Build the nix flake
 	@nix build .#source
+
+.PHONY: nix-build-default
+nix-build-default: ## Build the nix flake
+	@nix build .#
