@@ -1,11 +1,9 @@
 package e2e
 
 import (
-	"bytes"
-	"fmt"
-	"os/exec"
 	"testing"
 
+	"github.com/cristianoliveira/sway-setter/internal/testutils"
 	"github.com/gkampitakis/go-snaps/snaps"
 )
 
@@ -37,19 +35,20 @@ func TestFlags(t *testing.T) {
 	}
 
 	for _, tc := range cases {
-		testName := fmt.Sprintf("%s: %+v", tc.name, tc.args)
-		t.Run(testName, func(tt *testing.T) {
-			cmd := exec.Command("../bin/sway-setter", tc.args...)
+		t.Run(tc.name, func(tt *testing.T) {
+			cmd := testutils.NewCommandTesting("", tc.args...)
 
-			var out, errOut bytes.Buffer
-			cmd.Stdout = &out
-			cmd.Stderr = &errOut
-
-			if err := cmd.Run(); err != nil && !tc.expectFail {
-				tt.Fatalf("\nUnexpected fail:\n%s\nstderr:%s\n stdout:%s", err, errOut.String(), out.String())
+			err := cmd.Run()
+			if err != nil && !tc.expectFail {
+				tt.Fatalf(err.Error())
 			}
 
-			snaps.MatchSnapshot(tt, cmd.String(), out.String())
+			command, err := cmd.String()
+			if err != nil {
+				tt.Fatalf(err.Error())
+			}
+
+			snaps.MatchSnapshot(tt, command)
 		})
 	}
 }

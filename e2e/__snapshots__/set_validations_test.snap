@@ -1,6 +1,15 @@
 
 [TestSetValidations/set_unkonwn_workspaces - 1]
-../bin/sway-setter -t unknown --print < data.json
+sway-setter -t unknown --print <<EOF
+[
+  {
+    "id": 1,
+    "name": "1",
+    "output": "HDMI-A-0",
+    "focused": true
+  }
+]
+EOF
 Error: type `unknown` is not supported
 
 Supported types

@@ -49,3 +49,60 @@ Help Options:
 
 
 ---
+
+[TestFlags/no_flag - 1]
+sway-setter  <<EOF
+
+EOF
+Usage:
+  sway-setter [OPTIONS]
+
+Application Options:
+  -t, --type=  Type 'set_{type}' object to be set analog of 'swaymsg -t
+               get_{type}'
+  -p, --print  Prints commands that would be executed. Can be used as input to
+               swaymsg
+
+Help Options:
+  -h, --help   Show this help message
+
+
+---
+
+[TestFlags/help_flag - 1]
+sway-setter -h <<EOF
+
+EOF
+Usage:
+  sway-setter [OPTIONS]
+
+Application Options:
+  -t, --type=  Type 'set_{type}' object to be set analog of 'swaymsg -t
+               get_{type}'
+  -p, --print  Prints commands that would be executed. Can be used as input to
+               swaymsg
+
+Help Options:
+  -h, --help   Show this help message
+
+
+---
+
+[TestFlags/help_flag#01 - 1]
+sway-setter --help <<EOF
+
+EOF
+Usage:
+  sway-setter [OPTIONS]
+
+Application Options:
+  -t, --type=  Type 'set_{type}' object to be set analog of 'swaymsg -t
+               get_{type}'
+  -p, --print  Prints commands that would be executed. Can be used as input to
+               swaymsg
+
+Help Options:
+  -h, --help   Show this help message
+
+
+---

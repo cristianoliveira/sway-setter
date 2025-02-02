@@ -13,6 +13,15 @@
     - "**/*.snap"
   run_on_init: true
 
+- name: nix checks @quick
+  run: 
+    - make nix-flake-check
+    - make nix-build-source
+  change: 
+    - "**/*.go"
+    - "**/*.nix"
+  run_on_init: true
+
 - name: git stage file @quick
   run: git add {{relative_path}}
   change: 

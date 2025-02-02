@@ -1,6 +1,6 @@
 
 [TestSetOutputs/set_outputs_with_invalid_output - 1]
-../bin/sway-setter -t set_outputs --print <<EOF
+sway-setter -t set_outputs --print <<EOF
 [
   {
     "id": 1,
@@ -19,7 +19,7 @@ Error: output rect is empty
 ---
 
 [TestSetOutputs/set_outputs_without_name - 1]
-../bin/sway-setter -t set_outputs --print <<EOF
+sway-setter -t set_outputs --print <<EOF
 [
   {
     "id": 383,
@@ -40,7 +40,7 @@ Error: output name is empty
 ---
 
 [TestSetOutputs/set_outputs_one_output - 1]
-../bin/sway-setter -t set_outputs --print <<EOF
+sway-setter -t set_outputs --print <<EOF
 [
   {
     "id": 383,
@@ -61,7 +61,7 @@ output DP-2 position 1920 0
 ---
 
 [TestSetOutputs/set_outputs_multiple_outputs - 1]
-../bin/sway-setter -t set_outputs --print <<EOF
+sway-setter -t set_outputs --print <<EOF
 [
   {
     "id": 383,

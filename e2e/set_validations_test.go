@@ -1,11 +1,9 @@
 package e2e
 
 import (
-	"bytes"
-	"fmt"
-	"os/exec"
 	"testing"
 
+	"github.com/cristianoliveira/sway-setter/internal/testutils"
 	"github.com/gkampitakis/go-snaps/snaps"
 )
 
@@ -29,28 +27,19 @@ func TestSetValidations(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(tt *testing.T) {
-			cmd := exec.Command("../bin/sway-setter", tc.args...)
-
-			var out, errOut bytes.Buffer
-			stdin := bytes.NewBufferString(tc.stdin)
-			cmd.Stdin = stdin
-			cmd.Stdout = &out
-			cmd.Stderr = &errOut
+			cmd := testutils.NewCommandTesting(tc.stdin, tc.args...)
 
 			err := cmd.Run()
 			if err != nil && !tc.expectFail {
-				tt.Fatalf("\nUnexpected fail:\n%s\nstderr:%s\n stdout:%s", err, errOut.String(), out.String())
+				tt.Fatalf(err.Error())
 			}
 
-			if tc.expectFail && err == nil {
-				tt.Fatalf("\nExpected fail but got success")
+			command, err := cmd.String()
+			if err != nil {
+				tt.Fatalf(err.Error())
 			}
 
-			snaps.MatchSnapshot(
-				tt,
-				fmt.Sprintf("%s < data.json", cmd.String()),
-				out.String(),
-			)
+			snaps.MatchSnapshot(tt, command)
 		})
 	}
 }

@@ -1,12 +1,9 @@
 package e2e
 
 import (
-	"bytes"
-	"encoding/json"
-	"fmt"
-	"os/exec"
 	"testing"
 
+	"github.com/cristianoliveira/sway-setter/internal/testutils"
 	"github.com/gkampitakis/go-snaps/snaps"
 )
 
@@ -117,39 +114,24 @@ func TestSetOutputs(t *testing.T) {
 					}
 				}
 			]`,
-			expectFail: false,
 		},
 	}
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(tt *testing.T) {
-			cmd := exec.Command("../bin/sway-setter", tc.args...)
-
-			var out, errOut bytes.Buffer
-			stdin := bytes.NewBufferString(tc.stdin)
-			cmd.Stdin = stdin
-			cmd.Stdout = &out
-			cmd.Stderr = &errOut
+			cmd := testutils.NewCommandTesting(tc.stdin, tc.args...)
 
 			err := cmd.Run()
 			if err != nil && !tc.expectFail {
-				tt.Fatalf("\nUnexpected fail:\n%s\nstderr:%s\n stdout:%s", err, errOut.String(), out.String())
+				tt.Fatalf(err.Error())
 			}
 
-			if tc.expectFail && err == nil {
-				tt.Fatalf("\nExpected fail but got success")
-			}
-
-			var prettyJson bytes.Buffer
-			err = json.Indent(&prettyJson, []byte(tc.stdin), "", "  ")
+			command, err := cmd.String()
 			if err != nil {
-				tt.Fatalf("\nError indenting json: %s", err)
+				tt.Fatalf(err.Error())
 			}
-			snaps.MatchSnapshot(
-				tt,
-				fmt.Sprintf("%s <<EOF\n%s\nEOF", cmd.String(), prettyJson.String()),
-				out.String(),
-			)
+
+			snaps.MatchSnapshot(tt, command)
 		})
 	}
 }

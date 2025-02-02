@@ -23,3 +23,11 @@ test-e2e: build ## Run the e2e tests
 .PHONY: test-e2e-update
 test-e2e-update: build ## Run the e2e tests snapshots and update
 	UPDATE_SNAPS=true go test ./e2e -v
+
+.PHONY: nix-flake-check
+nix-flake-check: ## Check the nix flake
+	@nix flake check
+
+.PHONY: nix-build-source
+nix-build-source: ## Build the nix flake
+	@nix build .#source
