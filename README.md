@@ -6,6 +6,16 @@ Sway-setter allows you to use the output of swaymsg to restore state of your wor
 
 Very useful to restore state after using wdisplays or similar tools, as well your current monitor setup.
 
+**Example of my usecase**
+```bash
+# adjust your outputs as you please
+wdisplays
+# Save the current configuration
+swaymsg -t get_outputs > ~/.local/state/sway-outputs.json
+# Configure to load it on log in
+sway-setter -t set_outputs < ~/.local/state/sway-outputs.json
+```
+
 ## Motivation
 
 I use SwayWM with my notebook and sometimes I have up to 3 monitors in different layouts, and I use wdisplays to configure them. But once I have to restart or log out my system the configuration is lost and I have to reconfigure them. My first attempt was to manually configure them in sway/config, but it was a pain to maintain and I had to change it every time I changed my monitor setup.
