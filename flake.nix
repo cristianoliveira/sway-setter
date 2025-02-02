@@ -19,9 +19,6 @@
           ];
         };
 
-        packages = {
-          default = pkgs.callPackage ./nix/package.nix { inherit pkgs; };
-          source = pkgs.callPackage ./nix/package-source.nix { inherit pkgs; };
-        };
+        packages = pkgs.callPackage ./default.nix { };
     });
 }
