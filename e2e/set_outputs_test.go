@@ -115,6 +115,46 @@ func TestSetOutputs(t *testing.T) {
 				}
 			]`,
 		},
+		{
+			name: "set outputs and apply resolution",
+			args: []string{
+				"-t", "set_outputs",
+				"--print",
+			},
+			stdin: `
+			[
+				{
+					"id": 383,
+					"name": "DP-2",
+					"type": "output",
+					"orientation": "none",
+					"rect": {
+						"x": 1920,
+						"y": 0,
+						"width": 1920,
+						"height": 1080
+					},
+					"current_mode": {
+						"width": 1920,
+						"height": 1080,
+						"refresh_rate": 60,
+						"picture_aspect_ratio": "16:9"
+					}
+				},
+				{
+					"id": 384,
+					"name": "DP-1",
+					"type": "output",
+					"orientation": "none",
+					"rect": {
+						"x": 0,
+						"y": 0,
+						"width": 1920,
+						"height": 1080
+					}
+				}
+			]`,
+		},
 	}
 
 	for _, tc := range cases {

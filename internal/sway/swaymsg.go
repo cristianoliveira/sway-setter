@@ -43,14 +43,3 @@ func (s SwayMsgConnection) FocusWorkspace(workspaceName string) error {
 	command := fmt.Sprintf("workspace %s", workspaceName)
 	return s.Command(command)
 }
-
-// SetOutputPosition sets the position of the output
-// See options in 'man sway-output'
-func (s SwayMsgConnection) SetOutputPosition(outputName string, x int, y int) error {
-	if len(outputName) == 0 {
-		return fmt.Errorf("Error: output name is empty")
-	}
-
-	command := fmt.Sprintf("output %s position %d %d", outputName, x, y)
-	return s.Command(command)
-}

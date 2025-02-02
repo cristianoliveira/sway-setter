@@ -11,15 +11,55 @@ type OutputRect struct {
 	Height int `json:"height"`
 }
 
-type SwayOutput struct {
-	Id        int         `json:"id"`
-	Name      string      `json:"name"`
-	Active    bool        `json:"active"`
-	Dpms      bool        `json:"dpms"`
-	Transform string      `json:"transform"`
-	Rect      *OutputRect `json:"rect"`
+type Mode struct {
+	Width       int    `json:"width"`
+	Height      int    `json:"height"`
+	RefreshRate int    `json:"refresh_rate"`
+	AspectRatio string `json:"picture_aspect_ratio"`
 }
 
+type SwayOutput struct {
+	Id         int         `json:"id"`
+	Name       string      `json:"name"`
+	Active     bool        `json:"active"`
+	Dpms       bool        `json:"dpms"`
+	Transform  string      `json:"transform"`
+	Rect       *OutputRect `json:"rect"`
+	CurentMode *Mode       `json:"current_mode"`
+}
+
+// toCommand returns the command to set the output
+func (s SwayOutput) toCommand() (string, error) {
+	if len(s.Name) == 0 {
+		return "", fmt.Errorf("Error: output name is empty")
+	}
+
+	if s.Rect == nil {
+		return "", fmt.Errorf("Error: output rect is empty")
+	}
+
+	command := fmt.Sprintf(
+		"output %s position %d %d",
+		s.Name,
+		s.Rect.X,
+		s.Rect.Y,
+	)
+
+	if s.CurentMode != nil {
+		command += fmt.Sprintf(
+			" resolution %dx%d@%dHz",
+			s.CurentMode.Width,
+			s.CurentMode.Height,
+			s.CurentMode.RefreshRate,
+		)
+	}
+
+	return command, nil
+}
+
+// SetOutputs apply the given outputs configuration
+// into the sway via swaymsg
+// See 'man 5 sway-output' and 'man swaymsg'
 func SetOutputs(outputs []SwayOutput) error {
 	swaymsg, err := ConnectToSway()
 	if err != nil {
@@ -35,11 +75,12 @@ func SetOutputs(outputs []SwayOutput) error {
 			return fmt.Errorf("Error: output rect is empty")
 		}
 
-		err = swaymsg.SetOutputPosition(
-			output.Name,
-			output.Rect.X,
-			output.Rect.Y,
-		)
+		command, err := output.toCommand()
+		if err != nil {
+			return err
+		}
+
+		err = swaymsg.Command(command)
 
 		if err != nil {
 			return err

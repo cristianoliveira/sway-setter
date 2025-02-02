@@ -3,6 +3,13 @@
   change: "**/*.go"
   run_on_init: true
 
+- name: make test @quick
+  run: go test ./...
+  change: 
+    - "**/*.go"
+    - "**/*.snap"
+  run_on_init: true
+
 - name: run ci checks @quick @ci
   run: | ## Watch with `fzz -t @ci`
    cat .github/workflows/on-push.yml \

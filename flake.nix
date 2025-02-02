@@ -19,6 +19,8 @@
           ];
         };
 
-        packages = pkgs.callPackage ./default.nix { };
+        packages = import ./default.nix {
+          inherit pkgs;
+        };
     });
 }

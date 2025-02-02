@@ -21,21 +21,45 @@ func TestOutputSetter(t *testing.T) {
 					Width:  1920,
 					Height: 1080,
 				},
+
+				CurentMode: &Mode{
+					Width:       1920,
+					Height:      1080,
+					RefreshRate: 60,
+				},
 			},
 			{
 				Name: "HDMI-A-1",
+
 				Rect: &OutputRect{
 					X:      1920,
 					Y:      0,
-					Width:  1920,
-					Height: 1080,
+					Width:  1280,
+					Height: 1024,
+				},
+
+				CurentMode: &Mode{
+					Width:       1280,
+					Height:      1024,
+					RefreshRate: 50,
+				},
+			},
+			{
+				Name: "HDMI-A-2",
+
+				Rect: &OutputRect{
+					X:      1920,
+					Y:      0,
+					Width:  1280,
+					Height: 1024,
 				},
 			},
 		}
 
 		expectedCommands := []string{
-			"output eDP-1 position 0 0",
-			"output HDMI-A-1 position 1920 0",
+			"output eDP-1 position 0 0 resolution 1920x1080@60Hz",
+			"output HDMI-A-1 position 1920 0 resolution 1280x1024@50Hz",
+			"output HDMI-A-2 position 1920 0",
 		}
 
 		err := SetOutputs(swayOutputs)
@@ -53,7 +77,7 @@ func TestOutputSetter(t *testing.T) {
 
 		for i, command := range con.CommandsHistory {
 			if command != expectedCommands[i] {
-				t.Errorf("Expected: \n %s\nGot: %s", expectedCommands[i], command)
+				t.Errorf("Command:%d\nExpected:\n%s\nGot:\n%s", i, expectedCommands[i], command)
 			}
 		}
 	})
