@@ -54,6 +54,10 @@ func (s SwayOutput) toCommand() (string, error) {
 		)
 	}
 
+	if len(s.Transform) > 0 {
+		command += fmt.Sprintf(" transform %s", s.Transform)
+	}
+
 	return command, nil
 }
 

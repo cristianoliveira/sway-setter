@@ -54,12 +54,25 @@ func TestOutputSetter(t *testing.T) {
 					Height: 1024,
 				},
 			},
+			{
+				Name: "HDMI-A-90",
+
+				Rect: &OutputRect{
+					X:      1920,
+					Y:      0,
+					Width:  1280,
+					Height: 1024,
+				},
+
+				Transform: "90",
+			},
 		}
 
 		expectedCommands := []string{
 			"output eDP-1 position 0 0 resolution 1920x1080@60Hz",
 			"output HDMI-A-1 position 1920 0 resolution 1280x1024@50Hz",
 			"output HDMI-A-2 position 1920 0",
+			"output HDMI-A-90 position 1920 0 transform 90",
 		}
 
 		err := SetOutputs(swayOutputs)

@@ -120,6 +120,7 @@ sway-setter -t set_outputs --print <<EOF
     "name": "DP-1",
     "type": "output",
     "orientation": "none",
+    "transform": "90",
     "rect": {
       "x": 0,
       "y": 0,
@@ -130,6 +131,6 @@ sway-setter -t set_outputs --print <<EOF
 ]
 EOF
 output DP-2 position 1920 0 resolution 1920x1080@60Hz
-output DP-1 position 0 0
+output DP-1 position 0 0 transform 90
 
 ---

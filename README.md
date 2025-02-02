@@ -40,9 +40,9 @@ sway-setter -t set_workspaces < output.json
 - [ ] Restore outputs 
 
   - [x] Restore positions
-  - [ ] Restore modes
+  - [x] Restore modes
   - [ ] Restore scale
-  - [ ] Restore transform
+  - [x] Restore transform (rotation 90, 180, etc)
   - [ ] Restore primary
   - [ ] Restore active
 

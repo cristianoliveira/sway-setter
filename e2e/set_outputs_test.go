@@ -146,6 +146,7 @@ func TestSetOutputs(t *testing.T) {
 					"name": "DP-1",
 					"type": "output",
 					"orientation": "none",
+					"transform": "90",
 					"rect": {
 						"x": 0,
 						"y": 0,
