@@ -65,6 +65,18 @@ To see more examples check the [snapshots](./e2e/__snapshots__) folder, the snap
 
 ## Installation
 
+### Nix
+  
+```bash
+nix profile install 'github:cristianoliveira/sway-setter'
+```
+
+### Golang
+
+```bash
+go install github.com/cristianoliveira/sway-setter
+```
+
 ### Requirements
 
  - Golang 1.23 or later
