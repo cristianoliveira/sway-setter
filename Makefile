@@ -35,3 +35,7 @@ nix-build-source: ## Build the nix flake
 .PHONY: nix-build-default
 nix-build-default: ## Build the nix flake
 	@nix build .#
+
+.PHONY: git-hook-precommit
+git-hook-precommit: ## Install the pre-commit git hook
+	./ci/pre-commit.sh
