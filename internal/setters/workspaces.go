@@ -4,13 +4,6 @@ import (
 	"fmt"
 )
 
-type SwayWorkspace struct {
-	Id      int    `json:"id"`
-	Name    string `json:"name"`
-	Output  string `json:"output"`
-	Focused bool   `json:"focused"`
-}
-
 // SetWorkspaces configures workspaces to the provided outputs
 // and focuses the workspace that is marked as focused.
 //
