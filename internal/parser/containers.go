@@ -147,10 +147,30 @@ func SetContainersCommand(workspaces []SwayWorkspace) (*[]string, error) {
 				)
 
 				if container.Rect != nil {
+					// man 5 sway | grep 'move.*absolute' -A 4
+					// move absolute position <x> <y>
 					commands = append(
 						commands,
-						fmt.Sprintf("%s move absolute position %d %d", cmd, container.Rect.X, container.Rect.Y),
+						fmt.Sprintf(
+							"%s move absolute position %d %d",
+							cmd,
+							container.Rect.X,
+							container.Rect.Y,
+						),
 					)
+
+					// man 5 sway | grep 'resize.*set' -A 4
+					// resize set [width] <width> [px|ppt] [height] <height> [px|ppt]
+					commands = append(
+						commands,
+						fmt.Sprintf(
+							"%s resize set width %d height %d",
+							cmd,
+							container.Rect.Width,
+							container.Rect.Height,
+						),
+					)
+
 				}
 
 			}
