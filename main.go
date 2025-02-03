@@ -12,7 +12,7 @@ func main() {
 
 	err := cmd.Execute(opts)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprintf(os.Stderr, "%s\n", err)
 		os.Exit(1)
 	}
 }

@@ -15,6 +15,7 @@ sway-setter -t set_outputs --print <<EOF
 ]
 EOF
 Error: output rect is empty
+exit status 1
 
 ---
 
@@ -36,6 +37,7 @@ sway-setter -t set_outputs --print <<EOF
 ]
 EOF
 Error: output name is empty
+exit status 1
 
 ---
 

@@ -64,10 +64,11 @@ func (c *CommandTesting) String() (string, error) {
 	// Replace "go run ." with the sway-setter
 	args := strings.Join(c.Cmd.Args[3:], " ")
 	return fmt.Sprintf(
-		"%s %s <<EOF\n%s\nEOF\n%s",
+		"%s %s <<EOF\n%s\nEOF\n%s%s",
 		"sway-setter",
 		args,
 		prettyJson.String(),
 		c.StdOut.String(),
+		c.StdErr.String(),
 	), nil
 }
