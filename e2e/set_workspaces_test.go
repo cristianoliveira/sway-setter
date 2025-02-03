@@ -17,7 +17,7 @@ func TestSetWorkspaces(t *testing.T) {
 		{
 			name: "set workspaces with invalid json",
 			args: []string{
-				"-t", "set_workspaces",
+				"workspaces",
 				"--print",
 			},
 			// Expect a json array
@@ -27,7 +27,7 @@ func TestSetWorkspaces(t *testing.T) {
 		{
 			name: "set workspaces with incomplete json",
 			args: []string{
-				"-t", "set_workspaces",
+				"workspaces",
 				"--print",
 			},
 			// Expect a json array
@@ -37,7 +37,7 @@ func TestSetWorkspaces(t *testing.T) {
 		{
 			name: "set workspaces one workspace",
 			args: []string{
-				"-t", "set_workspaces",
+				"workspaces",
 				"--print",
 			},
 			stdin: `[
@@ -53,7 +53,7 @@ func TestSetWorkspaces(t *testing.T) {
 		{
 			name: "set workspaces with multiple workspaces",
 			args: []string{
-				"-t", "set_workspaces",
+				"workspaces",
 				"--print",
 			},
 			stdin: `[
