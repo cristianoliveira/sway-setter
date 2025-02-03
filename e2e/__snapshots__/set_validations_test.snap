@@ -15,6 +15,7 @@ Error: type `unknown` is not supported
 Supported types
  set_workspaces: set workspaces from `swaymsg -t get_workspaces`
  set_outputs: set outputs from `swaymsg -t get_outputs`
+ set_containers: set containers from `swaymsg -t get_tree`
 exit status 1
 
 ---
