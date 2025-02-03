@@ -157,7 +157,8 @@ func Execute(opts *CliArgs) error {
 		errMsg := fmt.Sprintf("Error: type `%s` is not supported\n\n", opts.Type)
 		errMsg += fmt.Sprintf("Supported types\n")
 		errMsg += fmt.Sprintf(" set_workspaces: set workspaces from `swaymsg -t get_workspaces`\n")
-		errMsg += fmt.Sprintf(" set_outputs: set outputs from `swaymsg -t get_outputs`")
+		errMsg += fmt.Sprintf(" set_outputs: set outputs from `swaymsg -t get_outputs`\n")
+		errMsg += fmt.Sprintf(" set_containers: set containers from `swaymsg -t get_tree`")
 		return fmt.Errorf(errMsg)
 	}
 }
