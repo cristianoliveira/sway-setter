@@ -52,8 +52,10 @@ func TestContainerSetter(t *testing.T) {
 					{
 						AppId: "fn1",
 						Rect: &Rect{
-							X: 0,
-							Y: 200,
+							X:      0,
+							Y:      200,
+							Width:  200,
+							Height: 220,
 						},
 					},
 				},
@@ -68,6 +70,7 @@ func TestContainerSetter(t *testing.T) {
 			"[con_mark=\"setter:1\"] floating disable; [con_mark=\"setter:1\"] move container to workspace 2",
 			"[app_id=\"fn1\"] floating enable; [app_id=\"fn1\"] move container to workspace 2",
 			"[app_id=\"fn1\"] move absolute position 0 200",
+			"[app_id=\"fn1\"] resize set width 200 height 220",
 		}
 
 		commands, err := SetContainersCommand(swayWorkspaces)

@@ -162,5 +162,6 @@ EOF
 [title="title1"] floating disable; [title="title1"] move container to workspace 1
 [app_id="fn1"] floating enable; [app_id="fn1"] move container to workspace 1
 [app_id="fn1"] move absolute position 1940 1103
+[app_id="fn1"] resize set width 962 height 902
 
 ---
