@@ -16,6 +16,31 @@ swaymsg -t get_outputs > ~/.local/state/sway-outputs.json
 sway-setter -t set_outputs < ~/.local/state/sway-outputs.json
 ```
 
+### Integration with Sway
+
+Add the following to your sway config to save and restore your outputs configuration
+```
+# Load the output configuration on startup
+exec_always sway-setter \
+                -t set_outputs < $HOME/.local/state/sway-outputs.json
+# Load the output configuration on demand
+set $outputLoadMode "Output config: [s]ave, [r]eload"
+mode $outputLoadMode {
+    # Mappings
+    bindsym s exec swaymsg \
+        -t get_outputs > $HOME/.local/state/sway-outputs.json \
+        && swaymsg mode "default"
+    bindsym r exec sway-setter \
+        -t set_outputs < $HOME/.local/state/sway-outputs.json \
+        && swaymsg mode "default"
+
+    # Exit mode
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+bindsym $mod+Shift+o mode $outputLoadMode
+```
+
 ## Motivation
 
 I use SwayWM with my notebook and sometimes I have up to 3 monitors in different layouts, and I use wdisplays to configure them. But once I have to restart or log out my system the configuration is lost and I have to reconfigure them. My first attempt was to manually configure them in sway/config, but it was a pain to maintain and I had to change it every time I changed my monitor setup.
@@ -42,7 +67,7 @@ sway-setter -t set_workspaces < output.json
   - [x] Restore positions
   - [x] Restore modes
   - [ ] Restore scale
-  - [x] Restore transform (rotation 90, 180, etc)
+  - [x] Restore transform (rotation 90, 180, et)
   - [ ] Restore primary
   - [ ] Restore active
 
