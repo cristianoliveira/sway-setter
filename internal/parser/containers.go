@@ -2,8 +2,13 @@ package parser
 
 import (
 	"fmt"
+	"regexp"
 	"strings"
 )
+
+func escapeChars(str string) string {
+	return regexp.QuoteMeta(str)
+}
 
 func workspaceToCommand(workspace SwayWorkspace) (string, error) {
 	if len(workspace.Name) == 0 {
@@ -41,7 +46,7 @@ func containerToCommand(container SwayContainer) (*[]string, error) {
 	if len(container.Marks) > 0 {
 		for _, mark := range container.Marks {
 			if strings.Contains(mark, "setter:") {
-				cmd := fmt.Sprintf("[con_mark=\"%s\"]", mark)
+				cmd := fmt.Sprintf("[con_mark=\"%s\"]", escapeChars(mark))
 				commands = append(commands, cmd)
 				return &commands, nil
 			}
@@ -49,20 +54,20 @@ func containerToCommand(container SwayContainer) (*[]string, error) {
 	}
 
 	if len(container.AppId) > 0 {
-		cmd := fmt.Sprintf("[app_id=\"%s\"]", container.AppId)
+		cmd := fmt.Sprintf("[app_id=\"%s\"]", escapeChars(container.AppId))
 		commands = append(commands, cmd)
 		return &commands, nil
 	}
 
 	if container.WindowProperties != nil {
 		if len(container.WindowProperties.Title) > 0 {
-			cmd := fmt.Sprintf("[title=\"%s\"]", container.WindowProperties.Title)
+			cmd := fmt.Sprintf("[title=\"%s\"]", escapeChars(container.WindowProperties.Title))
 			commands = append(commands, cmd)
 			return &commands, nil
 		}
 
 		if len(container.WindowProperties.Class) > 0 {
-			cmd := fmt.Sprintf("[class=\"%s\"]", container.WindowProperties.Class)
+			cmd := fmt.Sprintf("[class=\"%s\"]", escapeChars(container.WindowProperties.Class))
 			commands = append(commands, cmd)
 			return &commands, nil
 		}

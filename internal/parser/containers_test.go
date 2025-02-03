@@ -25,6 +25,13 @@ func TestContainerSetter(t *testing.T) {
 							Title: "foobar",
 						},
 					},
+					{
+						AppId: "",
+						Name: "Window with special chars",
+						WindowProperties: &SwayContainerWindowProperties{
+							Title: "(foo) - foobar \\ bar",
+						},
+					},
 				},
 			},
 			{
@@ -47,6 +54,7 @@ func TestContainerSetter(t *testing.T) {
 		expectedCommands := []string{
 			"[app_id=\"1\"] move container to workspace 1",
 			"[title=\"foobar\"] move container to workspace 1",
+			"[title=\"\\(foo\\) - foobar \\\\ bar\"] move container to workspace 1",
 			"[class=\"foobarclass\"] move container to workspace 2",
 			"[con_mark=\"setter:1\"] move container to workspace 2",
 		}
