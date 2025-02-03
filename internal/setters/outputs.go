@@ -4,58 +4,34 @@ import (
 	"fmt"
 )
 
-type OutputRect struct {
-	X      int `json:"x"`
-	Y      int `json:"y"`
-	Width  int `json:"width"`
-	Height int `json:"height"`
-}
-
-type Mode struct {
-	Width       int    `json:"width"`
-	Height      int    `json:"height"`
-	RefreshRate int    `json:"refresh_rate"`
-	AspectRatio string `json:"picture_aspect_ratio"`
-}
-
-type SwayOutput struct {
-	Id         int         `json:"id"`
-	Name       string      `json:"name"`
-	Active     bool        `json:"active"`
-	Dpms       bool        `json:"dpms"`
-	Transform  string      `json:"transform"`
-	Rect       *OutputRect `json:"rect"`
-	CurentMode *Mode       `json:"current_mode"`
-}
-
-// toCommand returns the command to set the output
-func (s SwayOutput) toCommand() (string, error) {
-	if len(s.Name) == 0 {
+// outputToCommand returns the command to set the output
+func outputToCommand(output SwayOutput) (string, error) {
+	if len(output.Name) == 0 {
 		return "", fmt.Errorf("Error: output name is empty")
 	}
 
-	if s.Rect == nil {
+	if output.Rect == nil {
 		return "", fmt.Errorf("Error: output rect is empty")
 	}
 
 	command := fmt.Sprintf(
 		"output %s position %d %d",
-		s.Name,
-		s.Rect.X,
-		s.Rect.Y,
+		output.Name,
+		output.Rect.X,
+		output.Rect.Y,
 	)
 
-	if s.CurentMode != nil {
+	if output.CurentMode != nil {
 		command += fmt.Sprintf(
 			" resolution %dx%d@%dHz",
-			s.CurentMode.Width,
-			s.CurentMode.Height,
-			s.CurentMode.RefreshRate,
+			output.CurentMode.Width,
+			output.CurentMode.Height,
+			output.CurentMode.RefreshRate,
 		)
 	}
 
-	if len(s.Transform) > 0 {
-		command += fmt.Sprintf(" transform %s", s.Transform)
+	if len(output.Transform) > 0 {
+		command += fmt.Sprintf(" transform %s", output.Transform)
 	}
 
 	return command, nil
@@ -79,7 +55,7 @@ func SetOutputs(outputs []SwayOutput) error {
 			return fmt.Errorf("Error: output rect is empty")
 		}
 
-		command, err := output.toCommand()
+		command, err := outputToCommand(output)
 		if err != nil {
 			return err
 		}
