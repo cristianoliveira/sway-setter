@@ -79,12 +79,12 @@ type SwayContainer struct {
 }
 
 func CollectWorkspaces(node SwayRoot) ([]SwayWorkspace, error) {
-	if len(node.Nodes) == 0 {
-		return nil, fmt.Errorf("tree doesn't have any outputs")
+	if node.Type != "root" {
+		return nil, fmt.Errorf("the node is not a root node")
 	}
 
-	if node.Type != "root" {
-		return nil, fmt.Errorf("tree root is not a root node")
+	if len(node.Nodes) == 0 {
+		return nil, fmt.Errorf("the root doesn't have any outputs")
 	}
 
 	workspaces := []SwayWorkspace{}
