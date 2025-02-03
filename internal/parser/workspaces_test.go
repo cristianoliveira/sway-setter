@@ -1,7 +1,6 @@
-package setters
+package parser
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/cristianoliveira/sway-setter/internal/sway"
@@ -9,10 +8,7 @@ import (
 )
 
 func TestWorkspaceSetter(t *testing.T) {
-	t.Run("SetWorkspaces", func(t *testing.T) {
-		con := testutils.MockedConnector{}
-		sway.SwayIPCConnector = &con
-
+	t.Run("SetWorkspaces", func(tt *testing.T) {
 		swayWorkspaces := []SwayWorkspace{
 			{
 				Name:    "1",
@@ -38,15 +34,18 @@ func TestWorkspaceSetter(t *testing.T) {
 			"workspace 2",
 		}
 
-		SetWorkspaces(swayWorkspaces)
-
-		if len(con.CommandsHistory) != len(expectedCommands) {
-			t.Errorf("Expected 4 commands to be executed, got %d", len(con.CommandsHistory))
+		commands, err := SetWorkspacesCommand(swayWorkspaces)
+		if err != nil {
+			tt.Fatalf("Expected no error, got: %s", err)
 		}
 
-		for i, command := range con.CommandsHistory {
+		if len(*commands) != len(expectedCommands) {
+			tt.Errorf("Expected 4 commands to be executed, got %d", len(*commands))
+		}
+
+		for i, command := range *commands {
 			if command != expectedCommands[i] {
-				t.Errorf("Expected: \n %s\nGot: %s", expectedCommands[i], command)
+				tt.Errorf("Expected: \n %s\nGot: %s", expectedCommands[i], command)
 			}
 		}
 	})
@@ -59,24 +58,6 @@ func TestWorkspaceSetterValidations(t *testing.T) {
 		errorMsg   string
 		connector  sway.SwayConnector
 	}{
-		{
-			title: "error on sway connection",
-			workspaces: []SwayWorkspace{
-				{
-					Id:      1,
-					Name:    "1",
-					Output:  "HDMI-A-0",
-					Focused: true,
-				},
-			},
-			errorMsg: "Error: error on sway connection",
-			connector: &testutils.DinamicMockedConnector{
-				Handler: func(command string) ([]byte, error) {
-					return nil, fmt.Errorf("Error: error on sway connection")
-				},
-			},
-		},
-
 		{
 			title:      "empty workspaces",
 			workspaces: []SwayWorkspace{},
@@ -113,8 +94,10 @@ func TestWorkspaceSetterValidations(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.title, func(tt *testing.T) {
-			sway.SwayIPCConnector = tc.connector
-			err := SetWorkspaces(tc.workspaces)
+			commands, err := SetWorkspacesCommand(tc.workspaces)
+			if commands != nil {
+				tt.Errorf("Expected no command, got %v", commands)
+			}
 
 			if err == nil {
 				tt.Errorf("Expected error, got nil")

@@ -1,4 +1,4 @@
-package setters
+package parser
 
 import (
 	"testing"
@@ -51,20 +51,20 @@ func TestContainerSetter(t *testing.T) {
 			"[con_mark=\"setter:1\"] move container to workspace 2",
 		}
 
-		err := SetContainers(swayWorkspaces)
+		commands, err := SetContainersCommand(swayWorkspaces)
 		if err != nil {
 			t.Errorf("Expected no error, got: %s", err)
 		}
 
-		if len(con.CommandsHistory) != len(expectedCommands) {
+		if len(*commands) != len(expectedCommands) {
 			t.Fatalf(
 				"Expected %d commands to be executed, got %d",
 				len(expectedCommands),
-				len(con.CommandsHistory),
+				len(*commands),
 			)
 		}
 
-		for i, command := range con.CommandsHistory {
+		for i, command := range *commands {
 			if command != expectedCommands[i] {
 				t.Errorf("Expected: \n %s\nGot: %s", expectedCommands[i], command)
 			}

@@ -1,4 +1,4 @@
-package setters
+package parser
 
 import (
 	"fmt"
@@ -74,7 +74,7 @@ func containerToCommand(container SwayContainer) (*[]string, error) {
 	)
 }
 
-// SetContainers configures containers to the provided workpace
+// SetContainersCommand configures containers to the provided workpace
 // containers may be windows and apps.
 // Usually a workspace contains one or more containers.
 // To check the containers in your workspaces, run:
@@ -84,26 +84,22 @@ func containerToCommand(container SwayContainer) (*[]string, error) {
 //	  | jq '[recurse(.nodes[]?, .floating_nodes[]?) | select(.type == "con")]'
 //
 // ```
-func SetContainers(workspaces []SwayWorkspace) error {
-	swaymsg, err := ConnectToSway()
-	if err != nil {
-		return err
-	}
-
+func SetContainersCommand(workspaces []SwayWorkspace) (*[]string, error) {
+	var commands []string
 	if len(workspaces) == 0 {
-		return fmt.Errorf("Error: no workspaces provided")
+		return nil, fmt.Errorf("Error: no workspaces provided")
 	}
 
 	for _, workspace := range workspaces {
 		moveToWorkspaceCmd, err := workspaceToCommand(workspace)
 		if err != nil {
-			return err
+			return nil, err
 		}
 
 		for _, container := range workspace.Nodes {
 			containerCmd, err := containerToCommand(container)
 			if err != nil {
-				return fmt.Errorf(
+				return nil, fmt.Errorf(
 					"Error: failed to parse container '%s' in workspace '%s'\nReason: %s",
 					container.Name,
 					workspace.Name,
@@ -113,10 +109,10 @@ func SetContainers(workspaces []SwayWorkspace) error {
 
 			for _, cmd := range *containerCmd {
 				command := fmt.Sprintf("%s %s", cmd, moveToWorkspaceCmd)
-				swaymsg.Command(command)
+				commands = append(commands, command)
 			}
 		}
 	}
 
-	return nil
+	return &commands, nil
 }
