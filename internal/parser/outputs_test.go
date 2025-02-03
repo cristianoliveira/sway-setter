@@ -1,17 +1,11 @@
-package setters
+package parser
 
 import (
 	"testing"
-
-	"github.com/cristianoliveira/sway-setter/internal/sway"
-	"github.com/cristianoliveira/sway-setter/internal/testutils"
 )
 
 func TestOutputSetter(t *testing.T) {
 	t.Run("SetOutputPosition", func(t *testing.T) {
-		con := testutils.MockedConnector{}
-		sway.SwayIPCConnector = &con
-
 		swayOutputs := []SwayOutput{
 			{
 				Name: "eDP-1",
@@ -75,20 +69,20 @@ func TestOutputSetter(t *testing.T) {
 			"output HDMI-A-90 position 1920 0 transform 90",
 		}
 
-		err := SetOutputs(swayOutputs)
+		commands, err := SetOutputsCommand(swayOutputs)
 		if err != nil {
 			t.Errorf("Expected no error, got %s", err)
 		}
 
-		if len(con.CommandsHistory) != len(expectedCommands) {
+		if len(*commands) != len(expectedCommands) {
 			t.Errorf(
 				"Expected %d commands to be executed, got %d",
 				len(expectedCommands),
-				len(con.CommandsHistory),
+				len(*commands),
 			)
 		}
 
-		for i, command := range con.CommandsHistory {
+		for i, command := range *commands {
 			if command != expectedCommands[i] {
 				t.Errorf("Command:%d\nExpected:\n%s\nGot:\n%s", i, expectedCommands[i], command)
 			}

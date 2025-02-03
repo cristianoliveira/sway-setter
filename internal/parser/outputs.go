@@ -1,4 +1,4 @@
-package setters
+package parser
 
 import (
 	"fmt"
@@ -37,35 +37,27 @@ func outputToCommand(output SwayOutput) (string, error) {
 	return command, nil
 }
 
-// SetOutputs apply the given outputs configuration
+// SetOutputsCommand apply the given outputs configuration
 // into the sway via swaymsg
 // See 'man 5 sway-output' and 'man swaymsg'
-func SetOutputs(outputs []SwayOutput) error {
-	swaymsg, err := ConnectToSway()
-	if err != nil {
-		return err
-	}
-
+func SetOutputsCommand(outputs []SwayOutput) (*[]string, error) {
+	var commands []string
 	if len(outputs) == 0 {
-		return fmt.Errorf("Error: no outputs provided")
+		return nil, fmt.Errorf("Error: no outputs provided")
 	}
 
 	for _, output := range outputs {
 		if output.Rect == nil {
-			return fmt.Errorf("Error: output rect is empty")
+			return nil, fmt.Errorf("Error: output rect is empty")
 		}
 
 		command, err := outputToCommand(output)
 		if err != nil {
-			return err
+			return nil, err
 		}
 
-		err = swaymsg.Command(command)
-
-		if err != nil {
-			return err
-		}
+		commands = append(commands, command)
 	}
 
-	return nil
+	return &commands, nil
 }

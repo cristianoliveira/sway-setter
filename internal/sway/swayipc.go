@@ -78,3 +78,16 @@ func (c StdOutputConnector) Connect() (*SwayMsgConnection, error) {
 		},
 	}, nil
 }
+
+func ConfigStdoutConnector() {
+	SwayIPCConnector = &StdOutputConnector{}
+}
+
+func ConnectToSway() (*SwayMsgConnection, error) {
+	swaymsg, err := SwayIPCConnector.Connect()
+	if err != nil {
+		return nil, err
+	}
+
+	return swaymsg, nil
+}
