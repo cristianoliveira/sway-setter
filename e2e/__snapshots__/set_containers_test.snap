@@ -101,9 +101,9 @@ sway-setter -t set_containers --print <<EOF
   ]
 }
 EOF
-[app_id="app1"] move container to workspace 1
-[title="title1"] move container to workspace 1
-[con_mark="setter:1"] move container to workspace 2
-[class="class1"] move container to workspace 2
+[app_id="app1"] floating disable; [app_id="app1"] move container to workspace 1
+[title="title1"] floating disable; [title="title1"] move container to workspace 1
+[con_mark="setter:1"] floating disable; [con_mark="setter:1"] move container to workspace 2
+[class="class1"] floating disable; [class="class1"] move container to workspace 2
 
 ---

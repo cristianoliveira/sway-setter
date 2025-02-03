@@ -28,6 +28,7 @@ func workspaceToCommand(workspace SwayWorkspace) (string, error) {
 // 3. window_class
 func containerToCommand(container SwayContainer) (*[]string, error) {
 	commands := []string{}
+
 	if len(container.Nodes) > 0 {
 		for _, subContainer := range container.Nodes {
 			subContainerCmd, err := containerToCommand(subContainer)
@@ -113,8 +114,45 @@ func SetContainersCommand(workspaces []SwayWorkspace) (*[]string, error) {
 			}
 
 			for _, cmd := range *containerCmd {
-				command := fmt.Sprintf("%s %s", cmd, moveToWorkspaceCmd)
-				commands = append(commands, command)
+				commands = append(
+					commands,
+					fmt.Sprintf(
+						"%s; %s",
+						fmt.Sprintf("%s %s", cmd, "floating disable"),
+						fmt.Sprintf("%s %s", cmd, moveToWorkspaceCmd),
+					),
+				)
+			}
+		}
+
+		for _, container := range workspace.FloatinNodes {
+			containerCmd, err := containerToCommand(container)
+			if err != nil {
+				return nil, fmt.Errorf(
+					"Error: failed to parse container '%s' in workspace '%s'\nReason: %s",
+					container.Name,
+					workspace.Name,
+					err.Error(),
+				)
+			}
+
+			for _, cmd := range *containerCmd {
+				commands = append(
+					commands,
+					fmt.Sprintf(
+						"%s; %s",
+						fmt.Sprintf("%s %s", cmd, "floating enable"),
+						fmt.Sprintf("%s %s", cmd, moveToWorkspaceCmd),
+					),
+				)
+
+				if container.Rect != nil {
+					commands = append(
+						commands,
+						fmt.Sprintf("%s move absolute position %d %d", cmd, container.Rect.X, container.Rect.Y),
+					)
+				}
+
 			}
 		}
 	}
