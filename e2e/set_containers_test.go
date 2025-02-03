@@ -113,6 +113,61 @@ func TestSetContainers(t *testing.T) {
 			}`,
 			expectFail: false,
 		},
+		{
+			name: "set containers with floating nodes",
+			args: []string{
+				"-t", "set_containers",
+				"--print",
+			},
+			stdin: `{
+				"id":1,
+				"type": "root",
+				"nodes":[
+					{
+						"id":2,
+						"type":"output",
+						"nodes":[
+							{
+								"id":3,
+								"type":"workspace",
+								"name":"1",
+								"nodes":[
+									{
+										"id":4,
+										"type":"con",
+										"name":"1",
+										"app_id":"app1"
+									},
+									{
+										"id":5,
+										"type":"con",
+										"name":"2",
+										"window_properties": {
+											"title": "title1"
+										}
+									}
+								],
+								"floating_nodes": [
+									{
+										"id": 22,
+										"type": "floating_con",
+										"name": "floating1",
+										"app_id": "fn1",
+										"rect": {
+											"x": 1940,
+											"y": 1103,
+											"width": 962,
+											"height": 902
+										}
+									}
+								]
+							}
+						]
+					}
+				]
+			}`,
+			expectFail: false,
+		},
 	}
 
 	for _, tc := range cases {
