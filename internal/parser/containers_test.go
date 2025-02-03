@@ -27,7 +27,7 @@ func TestContainerSetter(t *testing.T) {
 					},
 					{
 						AppId: "",
-						Name: "Window with special chars",
+						Name:  "Window with special chars",
 						WindowProperties: &SwayContainerWindowProperties{
 							Title: "(foo) - foobar \\ bar",
 						},
@@ -48,20 +48,31 @@ func TestContainerSetter(t *testing.T) {
 						Marks: []string{"setter:1"},
 					},
 				},
+				FloatinNodes: []SwayContainer{
+					{
+						AppId: "fn1",
+						Rect: &Rect{
+							X: 0,
+							Y: 200,
+						},
+					},
+				},
 			},
 		}
 
 		expectedCommands := []string{
-			"[app_id=\"1\"] move container to workspace 1",
-			"[title=\"foobar\"] move container to workspace 1",
-			"[title=\"\\(foo\\) - foobar \\\\ bar\"] move container to workspace 1",
-			"[class=\"foobarclass\"] move container to workspace 2",
-			"[con_mark=\"setter:1\"] move container to workspace 2",
+			"[app_id=\"1\"] floating disable; [app_id=\"1\"] move container to workspace 1",
+			"[title=\"foobar\"] floating disable; [title=\"foobar\"] move container to workspace 1",
+			"[title=\"\\(foo\\) - foobar \\\\ bar\"] floating disable; [title=\"\\(foo\\) - foobar \\\\ bar\"] move container to workspace 1",
+			"[class=\"foobarclass\"] floating disable; [class=\"foobarclass\"] move container to workspace 2",
+			"[con_mark=\"setter:1\"] floating disable; [con_mark=\"setter:1\"] move container to workspace 2",
+			"[app_id=\"fn1\"] floating enable; [app_id=\"fn1\"] move container to workspace 2",
+			"[app_id=\"fn1\"] move absolute position 0 200",
 		}
 
 		commands, err := SetContainersCommand(swayWorkspaces)
 		if err != nil {
-			t.Errorf("Expected no error, got: %s", err)
+			t.Errorf("\nExpected no error, got: %s", err)
 		}
 
 		if len(*commands) != len(expectedCommands) {
@@ -74,7 +85,7 @@ func TestContainerSetter(t *testing.T) {
 
 		for i, command := range *commands {
 			if command != expectedCommands[i] {
-				t.Errorf("Expected: \n %s\nGot: %s", expectedCommands[i], command)
+				t.Errorf("\nExpected: %s\nReceived: %s", expectedCommands[i], command)
 			}
 		}
 	})

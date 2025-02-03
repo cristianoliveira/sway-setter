@@ -11,7 +11,7 @@ type SwayRoot struct {
 	Nodes []SwayOutput `json:"nodes"`
 }
 
-type OutputRect struct {
+type Rect struct {
 	X      int `json:"x"`
 	Y      int `json:"y"`
 	Width  int `json:"width"`
@@ -32,18 +32,19 @@ type SwayOutput struct {
 	Active     bool            `json:"active"`
 	Dpms       bool            `json:"dpms"`
 	Transform  string          `json:"transform"`
-	Rect       *OutputRect     `json:"rect"`
+	Rect       *Rect           `json:"rect"`
 	CurentMode *Mode           `json:"current_mode"`
 	Nodes      []SwayWorkspace `json:"nodes"`
 }
 
 type SwayWorkspace struct {
-	Id      int    `json:"id"`
-	Type    string `json:"type"`
-	Name    string `json:"name"`
-	Output  string `json:"output"`
-	Focused bool   `json:"focused"`
-	Nodes   []SwayContainer
+	Id           int             `json:"id"`
+	Type         string          `json:"type"`
+	Name         string          `json:"name"`
+	Output       string          `json:"output"`
+	Focused      bool            `json:"focused"`
+	Nodes        []SwayContainer `json:"nodes"`
+	FloatinNodes []SwayContainer `json:"floating_nodes"`
 }
 
 type SwayContainerWindowProperties struct {
@@ -61,6 +62,7 @@ type SwayContainer struct {
 	WindowProperties *SwayContainerWindowProperties `json:"window_properties"`
 	Nodes            []SwayContainer                `json:"nodes"`
 	Marks            []string                       `json:"marks"`
+	Rect             *Rect                          `json:"rect"`
 }
 
 func CollectWorkspaces(node SwayRoot) ([]SwayWorkspace, error) {

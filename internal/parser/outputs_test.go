@@ -9,7 +9,7 @@ func TestOutputSetter(t *testing.T) {
 		swayOutputs := []SwayOutput{
 			{
 				Name: "eDP-1",
-				Rect: &OutputRect{
+				Rect: &Rect{
 					X:      0,
 					Y:      0,
 					Width:  1920,
@@ -25,7 +25,7 @@ func TestOutputSetter(t *testing.T) {
 			{
 				Name: "HDMI-A-1",
 
-				Rect: &OutputRect{
+				Rect: &Rect{
 					X:      1920,
 					Y:      0,
 					Width:  1280,
@@ -41,7 +41,7 @@ func TestOutputSetter(t *testing.T) {
 			{
 				Name: "HDMI-A-2",
 
-				Rect: &OutputRect{
+				Rect: &Rect{
 					X:      1920,
 					Y:      0,
 					Width:  1280,
@@ -51,7 +51,7 @@ func TestOutputSetter(t *testing.T) {
 			{
 				Name: "HDMI-A-90",
 
-				Rect: &OutputRect{
+				Rect: &Rect{
 					X:      1920,
 					Y:      0,
 					Width:  1280,

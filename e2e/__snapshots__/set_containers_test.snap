@@ -101,9 +101,66 @@ sway-setter -t set_containers --print <<EOF
   ]
 }
 EOF
-[app_id="app1"] move container to workspace 1
-[title="title1"] move container to workspace 1
-[con_mark="setter:1"] move container to workspace 2
-[class="class1"] move container to workspace 2
+[app_id="app1"] floating disable; [app_id="app1"] move container to workspace 1
+[title="title1"] floating disable; [title="title1"] move container to workspace 1
+[con_mark="setter:1"] floating disable; [con_mark="setter:1"] move container to workspace 2
+[class="class1"] floating disable; [class="class1"] move container to workspace 2
+
+---
+
+[TestSetContainers/set_containers_with_floating_nodes - 1]
+sway-setter -t set_containers --print <<EOF
+{
+  "id": 1,
+  "type": "root",
+  "nodes": [
+    {
+      "id": 2,
+      "type": "output",
+      "nodes": [
+        {
+          "id": 3,
+          "type": "workspace",
+          "name": "1",
+          "nodes": [
+            {
+              "id": 4,
+              "type": "con",
+              "name": "1",
+              "app_id": "app1"
+            },
+            {
+              "id": 5,
+              "type": "con",
+              "name": "2",
+              "window_properties": {
+                "title": "title1"
+              }
+            }
+          ],
+          "floating_nodes": [
+            {
+              "id": 22,
+              "type": "floating_con",
+              "name": "floating1",
+              "app_id": "fn1",
+              "rect": {
+                "x": 1940,
+                "y": 1103,
+                "width": 962,
+                "height": 902
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+EOF
+[app_id="app1"] floating disable; [app_id="app1"] move container to workspace 1
+[title="title1"] floating disable; [title="title1"] move container to workspace 1
+[app_id="fn1"] floating enable; [app_id="fn1"] move container to workspace 1
+[app_id="fn1"] move absolute position 1940 1103
 
 ---
