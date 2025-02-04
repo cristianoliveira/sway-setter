@@ -25,16 +25,24 @@ test-e2e-update: build ## Run the e2e tests snapshots and update
 	UPDATE_SNAPS=true go test ./e2e -v
 
 .PHONY: nix-flake-check
-nix-flake-check: ## Check the nix flake
+nix-flake-check: ## Check the nix flake 
 	@nix flake check
 
 .PHONY: nix-build-source
-nix-build-source: ## Build the nix flake
+nix-build-source: ## Build the nix flake (from source)
 	@nix build .#source
 
+.PHONY: nix-build-nightly
+nix-build-nightly: ## Build the nix flake (nightly)
+	@nix build .#nightly
+
 .PHONY: nix-build-default
-nix-build-default: ## Build the nix flake
+nix-build-default: ## Build the nix flake (latest official version)
 	@nix build .#
+
+.PHONY: nix-bump
+nix-bump: ## bump the nix flake (latest official version)
+	./ci/nix-bump.sh
 
 .PHONY: git-hook-precommit
 git-hook-precommit: ## Install the pre-commit git hook
