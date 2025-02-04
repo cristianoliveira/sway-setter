@@ -54,19 +54,22 @@ Help Options:
 sway-setter  <<EOF
 
 EOF
+The missing cli to use swaymsg 'getters' outputs
+
 Usage:
-  sway-setter [OPTIONS]
+  sway-setter [command]
 
-Application Options:
-  -t, --type=  Type 'set_{type}' object to be set analog of 'swaymsg -t
-               get_{type}'
-  -p, --print  Prints commands that would be executed. Can be used as input to
-               swaymsg
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  containers  Set containers from stdin - Use: `swaymsg -t get_tree`
+  help        Help about any command
+  outputs     Set outputs from stdin - Use: `swaymsg -t get_outputs`
+  workspaces  Set workspaces from stdin - Use: `swaymsg -t get_workspaces`
 
-Help Options:
-  -h, --help   Show this help message
+Flags:
+  -h, --help   help for sway-setter
 
-exit status 1
+Use "sway-setter [command] --help" for more information about a command.
 
 ---
 
@@ -74,18 +77,22 @@ exit status 1
 sway-setter -h <<EOF
 
 EOF
+The missing cli to use swaymsg 'getters' outputs
+
 Usage:
-  sway-setter [OPTIONS]
+  sway-setter [command]
 
-Application Options:
-  -t, --type=  Type 'set_{type}' object to be set analog of 'swaymsg -t
-               get_{type}'
-  -p, --print  Prints commands that would be executed. Can be used as input to
-               swaymsg
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  containers  Set containers from stdin - Use: `swaymsg -t get_tree`
+  help        Help about any command
+  outputs     Set outputs from stdin - Use: `swaymsg -t get_outputs`
+  workspaces  Set workspaces from stdin - Use: `swaymsg -t get_workspaces`
 
-Help Options:
-  -h, --help   Show this help message
+Flags:
+  -h, --help   help for sway-setter
 
+Use "sway-setter [command] --help" for more information about a command.
 
 ---
 
@@ -93,17 +100,21 @@ Help Options:
 sway-setter --help <<EOF
 
 EOF
+The missing cli to use swaymsg 'getters' outputs
+
 Usage:
-  sway-setter [OPTIONS]
+  sway-setter [command]
 
-Application Options:
-  -t, --type=  Type 'set_{type}' object to be set analog of 'swaymsg -t
-               get_{type}'
-  -p, --print  Prints commands that would be executed. Can be used as input to
-               swaymsg
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  containers  Set containers from stdin - Use: `swaymsg -t get_tree`
+  help        Help about any command
+  outputs     Set outputs from stdin - Use: `swaymsg -t get_outputs`
+  workspaces  Set workspaces from stdin - Use: `swaymsg -t get_workspaces`
 
-Help Options:
-  -h, --help   Show this help message
+Flags:
+  -h, --help   help for sway-setter
 
+Use "sway-setter [command] --help" for more information about a command.
 
 ---

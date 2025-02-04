@@ -17,7 +17,7 @@ func TestSetOutputs(t *testing.T) {
 		{
 			name: "set outputs with invalid output",
 			args: []string{
-				"-t", "set_outputs",
+				"outputs",
 				"--print",
 			},
 			stdin: `
@@ -38,7 +38,7 @@ func TestSetOutputs(t *testing.T) {
 		{
 			name: "set outputs without name",
 			args: []string{
-				"-t", "set_outputs",
+				"outputs",
 				"--print",
 			},
 			stdin: `
@@ -61,7 +61,7 @@ func TestSetOutputs(t *testing.T) {
 		{
 			name: "set outputs one output",
 			args: []string{
-				"-t", "set_outputs",
+				"outputs",
 				"--print",
 			},
 			stdin: `
@@ -84,7 +84,7 @@ func TestSetOutputs(t *testing.T) {
 		{
 			name: "set outputs multiple outputs",
 			args: []string{
-				"-t", "set_outputs",
+				"outputs",
 				"--print",
 			},
 			stdin: `
@@ -118,7 +118,7 @@ func TestSetOutputs(t *testing.T) {
 		{
 			name: "set outputs and apply resolution",
 			args: []string{
-				"-t", "set_outputs",
+				"outputs",
 				"--print",
 			},
 			stdin: `

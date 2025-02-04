@@ -17,7 +17,7 @@ func TestSetContainers(t *testing.T) {
 		{
 			name: "set containers with invalid json",
 			args: []string{
-				"-t", "set_containers",
+				"containers",
 				"--print",
 			},
 			// Expect a json array
@@ -27,7 +27,7 @@ func TestSetContainers(t *testing.T) {
 		{
 			name: "set containers with incomplete json",
 			args: []string{
-				"-t", "set_containers",
+				"containers",
 				"--print",
 			},
 			// Expect a json array
@@ -37,7 +37,7 @@ func TestSetContainers(t *testing.T) {
 		{
 			name: "set workspaces without containers",
 			args: []string{
-				"-t", "set_containers",
+				"containers",
 				"--print",
 			},
 			stdin: `[
@@ -53,7 +53,7 @@ func TestSetContainers(t *testing.T) {
 		{
 			name: "set containers with multiple workspaces",
 			args: []string{
-				"-t", "set_containers",
+				"containers",
 				"--print",
 			},
 			stdin: `{
@@ -116,7 +116,7 @@ func TestSetContainers(t *testing.T) {
 		{
 			name: "set containers with floating nodes",
 			args: []string{
-				"-t", "set_containers",
+				"containers",
 				"--print",
 			},
 			stdin: `{

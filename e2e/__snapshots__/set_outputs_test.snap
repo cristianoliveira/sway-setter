@@ -1,6 +1,6 @@
 
 [TestSetOutputs/set_outputs_with_invalid_output - 1]
-sway-setter -t set_outputs --print <<EOF
+sway-setter outputs --print <<EOF
 [
   {
     "id": 1,
@@ -14,13 +14,20 @@ sway-setter -t set_outputs --print <<EOF
   }
 ]
 EOF
-Error: output rect is empty
+Error: Error: output rect is empty
+Usage:
+  sway-setter outputs <stdin> [flags]
+
+Flags:
+  -h, --help    help for outputs
+  -p, --print   Prints commands that would be executed. Can be used as input to swaymsg
+
 exit status 1
 
 ---
 
 [TestSetOutputs/set_outputs_without_name - 1]
-sway-setter -t set_outputs --print <<EOF
+sway-setter outputs --print <<EOF
 [
   {
     "id": 383,
@@ -36,13 +43,20 @@ sway-setter -t set_outputs --print <<EOF
   }
 ]
 EOF
-Error: output name is empty
+Error: Error: output name is empty
+Usage:
+  sway-setter outputs <stdin> [flags]
+
+Flags:
+  -h, --help    help for outputs
+  -p, --print   Prints commands that would be executed. Can be used as input to swaymsg
+
 exit status 1
 
 ---
 
 [TestSetOutputs/set_outputs_one_output - 1]
-sway-setter -t set_outputs --print <<EOF
+sway-setter outputs --print <<EOF
 [
   {
     "id": 383,
@@ -63,7 +77,7 @@ output DP-2 position 1920 0
 ---
 
 [TestSetOutputs/set_outputs_multiple_outputs - 1]
-sway-setter -t set_outputs --print <<EOF
+sway-setter outputs --print <<EOF
 [
   {
     "id": 383,
@@ -97,7 +111,7 @@ output DP-1 position 0 0
 ---
 
 [TestSetOutputs/set_outputs_and_apply_resolution - 1]
-sway-setter -t set_outputs --print <<EOF
+sway-setter outputs --print <<EOF
 [
   {
     "id": 383,

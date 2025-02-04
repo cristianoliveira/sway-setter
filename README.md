@@ -13,7 +13,7 @@ wdisplays
 # Save the current configuration
 swaymsg -t get_outputs > ~/.local/state/sway-outputs.json
 # Configure to load it on log in
-sway-setter -t set_outputs < ~/.local/state/sway-outputs.json
+sway-setter outputs < ~/.local/state/sway-outputs.json
 ```
 
 ### Integration with Sway
@@ -21,8 +21,7 @@ sway-setter -t set_outputs < ~/.local/state/sway-outputs.json
 Add the following to your sway config to save and restore your outputs configuration
 ```
 # Load the output configuration on startup
-exec_always sway-setter \
-                -t set_outputs < $HOME/.local/state/sway-outputs.json
+exec_always sway-setter outputs < $HOME/.local/state/sway-outputs.json
 # Load the output configuration on demand
 set $outputLoadMode "Output config: [s]ave, [r]eload"
 mode $outputLoadMode {
@@ -30,8 +29,7 @@ mode $outputLoadMode {
     bindsym s exec swaymsg \
         -t get_outputs > $HOME/.local/state/sway-outputs.json \
         && swaymsg mode "default"
-    bindsym r exec sway-setter \
-        -t set_outputs < $HOME/.local/state/sway-outputs.json \
+    bindsym r exec sway-setter outputs < $HOME/.local/state/sway-outputs.json \
         && swaymsg mode "default"
 
     # Exit mode
@@ -59,7 +57,7 @@ The current features are:
 
 ```bash
 swaymsg -t get_workspaces > output.json
-sway-setter -t set_workspaces < output.json
+sway-setter workspaces < output.json
 ```
 
 - [ ] Restore outputs 
@@ -73,20 +71,24 @@ sway-setter -t set_workspaces < output.json
 
 ```bash
 swaymsg -t get_outputs > output.json
-sway-setter -t set_outputs < output.json
+sway-setter outputs < output.json
 ```
 
-- [ ] Restore inputt
+- [ ] Restore containers
 
 ```bash
-swaymsg -t get_inputs > output.json
-sway-setter -t set_inputs < output.json
+swaymsg -t get_tree > output.json
+sway-setter containers < output.json
 ```
 
-- [x] Use as an input for swaymsg, with the flag `--print|-p`
+- [x] Move containers to workspaces
+- [x] Resize containers 
+- [x] floating containers
+- [x] floating containers position
+
 
 ```bash
-swaymsg "$(sway-setter -pt set_workspaces < data.json)"
+swaymsg "$(sway-setter workspaces -p < data.json)"
 ```
 
 If you are looking for session restoring, there are other tools that can do that, such as:
