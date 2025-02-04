@@ -9,10 +9,10 @@
       owner = "cristianoliveira";
       repo = "sway-setter";
       rev = version;
-      sha256 = "";
+      sha256 = "sha256-TQAcKtIid1+zP6dRixcuH6jZZHko1+ujZH2Kya+Snq8=";
     };
 
-    vendorHash = "";
+    vendorHash = "sha256-1pCoyPjokM+Qm+mbNQLCOmVVqwHDUxJ10RyvLV/becQ=";
 
     ldflags = [
       "-s" "-w"
