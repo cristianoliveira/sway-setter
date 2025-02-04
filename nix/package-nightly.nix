@@ -2,10 +2,15 @@
   pkgs.buildGoModule rec {
     # name of our derivation
     name = "sway-setter";
-    version = "source";
+    version = "nightly"; # Branch 
 
     # sources that will be used for our derivation.
-    src = ../.;
+    src = pkgs.fetchFromGitHub {
+      owner = "cristianoliveira";
+      repo = "sway-setter";
+      rev = version;
+      sha256 = "";
+    };
 
     vendorHash = "";
 
